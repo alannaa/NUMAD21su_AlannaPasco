@@ -3,6 +3,8 @@ package neu.edu.madcourse.numad21su_alannapasco;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,6 +14,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    //Test to check if git is working
-    //Making change to test if git is working 
+
+    public void displayAbout(View view) {
+        TextView aboutText =  findViewById(R.id.aboutText); //by default has no value
+        aboutText.setText(R.string.aboutText_string);
+    }
+
 }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NUMAD21Su-AlannaPasco</string>
+    <string name="helloWorld_string">اهلا و سهلا!</string>
+    <string name="about_string">عن حالي</string>
+    <string name="aboutText_string">enteraboutinarabic here</string>
+    <string name="no_value_string"> </string>
+
+</resources>
