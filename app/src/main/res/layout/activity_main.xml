@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#aaae"
+    android:background="#7EAAAAEE"
     tools:context=".MainActivity">
 
     <TextView
@@ -25,10 +25,11 @@
         android:id="@+id/aboutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="148dp"
+        android:layout_marginBottom="160dp"
+        android:backgroundTint="#DC3A8FB7"
         android:fontFamily="serif"
         android:onClick="displayAbout"
-        android:text="@string/about_string"
+        android:text="@string/aboutButton_string"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -36,12 +37,28 @@
 
     <TextView
         android:id="@+id/aboutText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="280dp"
+        android:layout_width="290dp"
+        android:layout_height="26dp"
+        android:layout_marginTop="160dp"
         android:text="@string/no_value_string"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/helloWorldView" />
+
+    <Button
+        android:id="@+id/ToggleLangButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="#AB4AC3BF"
+        android:fontFamily="serif"
+        android:onClick="toggleLanguage"
+        android:text="@string/toggleLangButton_string"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

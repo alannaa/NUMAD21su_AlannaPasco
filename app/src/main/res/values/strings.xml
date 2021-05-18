@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">NUMAD21Su-AlannaPasco</string>
     <string name="helloWorld_string">Hello World!</string>
-    <string name="about_string">about</string>
+    <string name="aboutButton_string">about</string>
     <string name="aboutText_string">Alanna Pasco | pasco.a@northeastern.edu </string>
     <string name="no_value_string"> </string>
-
+    <string name="toggleLangButton_string">language</string>
 </resources>
