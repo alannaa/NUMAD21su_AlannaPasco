@@ -4,6 +4,5 @@
     <string name="helloWorld_string">اهلا بالعالم!</string>
     <string name="aboutButton_string">عن حالي</string>
     <string name="aboutText_string">الانا باسكو | pasco.a@northeastern.edu</string>
-    <string name="no_value_string"> </string>
     <string name="toggleLangButton_string">اللغه</string>
 </resources>
