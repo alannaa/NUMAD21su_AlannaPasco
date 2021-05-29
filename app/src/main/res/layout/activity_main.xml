@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/helloWorldView"
+        android:id="@+id/hello_world_text_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/helloWorld_string"
@@ -22,18 +22,35 @@
         app:layout_constraintVertical_bias="0.276" />
 
     <Button
-        android:id="@+id/aboutButton"
+        android:id="@+id/about_button_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="160dp"
         android:backgroundTint="#DC3A8FB7"
         android:fontFamily="serif"
-        android:onClick="displayAbout"
+        android:onClick="aboutButtonListener"
         android:text="@string/aboutButton_string"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/language_button_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="#AB4AC3BF"
+        android:fontFamily="serif"
+        android:onClick="languageButtonListener"
+        android:text="@string/toggleLangButton_string"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
 
     <TextView
         android:id="@+id/aboutText"
@@ -44,21 +61,7 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/helloWorldView" />
-
-    <Button
-        android:id="@+id/ToggleLangButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:backgroundTint="#AB4AC3BF"
-        android:fontFamily="serif"
-        android:onClick="toggleLanguage"
-        android:text="@string/toggleLangButton_string"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/hello_world_text_id" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
