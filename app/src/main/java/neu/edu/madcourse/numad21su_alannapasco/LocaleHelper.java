@@ -12,6 +12,8 @@ import java.util.Locale;
 
 
 //Code from GeekdForGeeks, used to toggle app language between english and arabic
+// I have since removed the feature of dynamically translating the app because the code was
+//getting too long. Keeping this here for future reference.
 //https://www.geeksforgeeks.org/how-to-change-the-whole-app-language-in-android-programmatically/
 public class LocaleHelper {
     private static final String SELECTED_LANGUAGE = "Locale.Helper.Selected.Language";

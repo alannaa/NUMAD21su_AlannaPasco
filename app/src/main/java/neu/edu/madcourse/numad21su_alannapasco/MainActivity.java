@@ -2,20 +2,16 @@ package neu.edu.madcourse.numad21su_alannapasco;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
-import android.content.res.Resources;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     private final String TAG = "MainActivity";
-    private String language = "en";
-    Context context = LocaleHelper.setLocale(MainActivity.this, language);
-    Resources resources = context.getResources();
+    private Button aboutButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,52 +19,16 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        aboutButton = findViewById(R.id.about_button_id);
+        aboutButton.setOnClickListener(v -> aboutButtonListener());
     }
 
-
-
-    public void aboutButtonListener(View view) {
-        //LAUNCH A NEW ACTIVITY HERE
-        TextView aboutText = findViewById(R.id.aboutText);
-        //If the space is currently empty, populate the aboutText (in the cur language)
-        //If the space currently displays the aboutText, remove it.
-        if (aboutText.getText().toString().isEmpty()) {
-            aboutText.setText(resources.getString(R.string.aboutText_string));
-        } else {
-            aboutText.setText(resources.getString(R.string.no_value_string));
-        }
-    }
-
-    // Toggles language between english and arabic
-    public void languageButtonListener(View view) {
-        if (language.equals("en")){
-            language = "ar";
-        } else {
-            language = "en";
-        }
-        Context context = LocaleHelper.setLocale(MainActivity.this, language);
-        resources = context.getResources();
-        onStart();
-
-//        Context context = LocaleHelper.setLocale(MainActivity.this, language);
-//        Resources resources = context.getResources();
-//
-//        TextView helloWorldText = findViewById(R.id.hello_world_text_id);
-//        helloWorldText.setText(resources.getString(R.string.helloWorld_string));
-//
-//        TextView aboutText = findViewById(R.id.about_button_id);
-//        if (aboutText.getText().toString().isEmpty()) {
-//            aboutText.setText(resources.getString(R.string.no_value_string));
-//        } else {
-//            aboutText.setText(resources.getString(R.string.aboutText_string));
-//        }
-//
-//        TextView aboutButton = findViewById(R.id.about_button_id);
-//        aboutButton.setText(resources.getString(R.string.aboutButton_string));
-//
-//        TextView langButton = findViewById(R.id.language_button_id);
-//        langButton.setText(resources.getString(R.string.toggleLangButton_string));
-
+    // Uses a new Intent to create a flow between this interface and the 'about' page
+    // Then uses 'startActivity' to navigate to the new activity
+    public void aboutButtonListener() {
+        Intent intent = new Intent(this, AboutActivity.class);
+        startActivity(intent);
     }
 
 

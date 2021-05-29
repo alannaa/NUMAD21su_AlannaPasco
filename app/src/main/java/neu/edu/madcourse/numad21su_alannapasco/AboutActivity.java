@@ -1,11 +1,13 @@
 package neu.edu.madcourse.numad21su_alannapasco;
 
-import android.app.Activity;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.Log;
 
-public class AboutActivity extends Activity {
-    private final String TAG = "AboutActivity";
+public class AboutActivity extends AppCompatActivity {
+
+    private final String TAG = "AboutActivity____";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,10 +17,6 @@ public class AboutActivity extends Activity {
         setContentView(R.layout.activity_about);
     }
 
-
-
-
-    
 
     @Override
     protected void onStart(){
@@ -49,4 +47,5 @@ public class AboutActivity extends Activity {
         Log.v(TAG, "AboutActivity onDestroy()");
         super.onDestroy();
     }
+
 }

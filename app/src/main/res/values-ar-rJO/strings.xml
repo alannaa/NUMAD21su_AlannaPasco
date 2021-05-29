@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">NUMAD21Su-AlannaPasco</string>
-    <string name="helloWorld_string">اهلا بالعالم!</string>
-    <string name="aboutButton_string">عن حالي</string>
-    <string name="aboutText_string">الانا باسكو | pasco.a@northeastern.edu</string>
-    <string name="toggleLangButton_string">اللغه</string>
+    <string name="hello_world_string">اهلا بالعالم!</string>
+    <string name="about_button_string">عن حالي</string>
+    <string name="about_text_string">الانا باسكو | pasco.a@northeastern.edu</string>
+    <string name="lang_button_string">الانجليزية</string>
 </resources>
