@@ -69,7 +69,7 @@ public class ClickyActivity extends AppCompatActivity {
         //If the most recently pressed button was the same button, we want to toggle the
         //pressed message on and off:
         if (curPressedMsg.getText().toString().equals(newPressedStr)) {
-            curPressedMsg.setText(R.string.no_value_string);
+            curPressedMsg.setText(R.string.pressed_string);
         } else {
             curPressedMsg.setText(newPressedStr);
         }

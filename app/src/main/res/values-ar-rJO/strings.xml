@@ -12,5 +12,5 @@
     <string name="D_string">س</string>
     <string name="E_string">ي</string>
     <string name="F_string">ف</string>
-    <string name="pressed_string">"Pressed: "</string>
+    <string name="pressed_string">"ضغطت: "</string>
 </resources>

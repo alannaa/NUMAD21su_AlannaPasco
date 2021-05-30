@@ -13,10 +13,18 @@
         <action
             android:id="@+id/about_action"
             app:destination="@id/aboutActivity" />
+        <action
+            android:id="@+id/clicky_action"
+            app:destination="@id/clickyActivity" />
     </activity>
     <activity
         android:id="@+id/aboutActivity"
         android:name="neu.edu.madcourse.numad21su_alannapasco.AboutActivity"
         android:label="activity_about"
         tools:layout="@layout/activity_about" />
+    <activity
+        android:id="@+id/clickyActivity"
+        android:name="neu.edu.madcourse.numad21su_alannapasco.ClickyActivity"
+        android:label="activity_clicky"
+        tools:layout="@layout/activity_clicky" />
 </navigation>

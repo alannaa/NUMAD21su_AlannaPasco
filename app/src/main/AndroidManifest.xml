@@ -9,10 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_lana_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NUMAD21SuAlannaPasco">
-        <activity android:name=".ClickyActivity"></activity>
+        <activity
+            android:name=".ClickyActivity"
+            android:parentActivityName=".MainActivity">
+        </activity>
         <activity
             android:name=".AboutActivity"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity">
+        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
