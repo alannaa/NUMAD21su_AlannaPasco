@@ -10,8 +10,6 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     private final String TAG = "MainActivity";
-    private Button aboutButton;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,18 +18,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        aboutButton = findViewById(R.id.about_button_id);
+        Button aboutButton = findViewById(R.id.about_button_id);
         aboutButton.setOnClickListener(v -> aboutButtonListener());
+
+        Button clickyButton = findViewById(R.id.clicky_button_id);
+        clickyButton.setOnClickListener(v -> clickyButtonListener());
     }
 
-    // Uses a new Intent to create a flow between this interface and the 'about' page
-    // Then uses 'startActivity' to navigate to the new activity
+
+    // Uses new Intent to create a flow between this interface and the 'about' page
     public void aboutButtonListener() {
         Intent intent = new Intent(this, AboutActivity.class);
         startActivity(intent);
     }
 
+    // Uses new Intent to create a flow between this interface and the 'clicky' page
+    public void clickyButtonListener() {
+        Intent intent = new Intent(this, AboutActivity.class);
+        startActivity(intent);
+    }
 
+
+
+
+    //Utility methods to learn the activity lifecycle
     @Override
     protected void onStart(){
         Log.v(TAG, "MainActivity onStart()");

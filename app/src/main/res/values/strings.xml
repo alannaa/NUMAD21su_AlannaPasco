@@ -5,4 +5,5 @@
     <string name="about_text_string">Alanna Pasco | pasco.a@northeastern.edu </string>
     <string name="no_value_string" translatable="false"> </string>
     <string name="lang_button_string">arabic</string>
+    <string name="clicky_button_string">Clicky</string>
 </resources>
