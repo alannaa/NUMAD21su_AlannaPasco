@@ -58,16 +58,16 @@ public class ClickyActivity extends AppCompatActivity {
         }
     }
 
-    //Helper function to toggle between displaying a "Pressed: X" message and returning
-    //to the default of "Pressed: __" with no letter displayed
+    //Helper function to toggle between displaying
+    // "Pressed: X" message and
+    // returning to the default of "Pressed: __" with no letter displayed
+    // I'm aware this is not a requirement but I felt it is an expected functionality
     public void togglePressedMsg(int buttonPressed){
-        //The 'pressed_string' TextView is currently:
+
         TextView curPressedMsg = findViewById(R.id.cur_pressed_msg_id);
-        //We want the pressed_string TextView to be updated to:
         String newPressedStr = getResources().getString(R.string.pressed_string) + " " +
                 getResources().getString(buttonPressed);
-        //If the most recently pressed button was the same button, we want to toggle the
-        //pressed message on and off:
+
         if (curPressedMsg.getText().toString().equals(newPressedStr)) {
             curPressedMsg.setText(R.string.pressed_string);
         } else {
