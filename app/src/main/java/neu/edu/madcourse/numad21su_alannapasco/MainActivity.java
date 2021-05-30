@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Uses new Intent to create a flow between this interface and the 'clicky' page
     public void clickyButtonListener() {
-        Intent intent = new Intent(this, AboutActivity.class);
+        Intent intent = new Intent(this, ClickyActivity.class);
         startActivity(intent);
     }
 

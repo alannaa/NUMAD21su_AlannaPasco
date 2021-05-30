@@ -6,4 +6,11 @@
     <string name="about_text_string">الانا باسكو | pasco.a@northeastern.edu</string>
     <string name="lang_button_string">الانجليزية</string>
     <string name="clicky_button_string">كلكي</string>
+    <string name="A_string">ا</string>
+    <string name="B_string">ب</string>
+    <string name="C_string">ت</string>
+    <string name="D_string">س</string>
+    <string name="E_string">ي</string>
+    <string name="F_string">ف</string>
+    <string name="pressed_string">"Pressed: "</string>
 </resources>
