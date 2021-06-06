@@ -11,10 +11,12 @@ import android.util.Log;
         -RecViewAdapter         bridges the backend LinkItems to frontend RecViewHolder
         -RecViewHolder          manages what's in item_card.xml
  */
-public class LinkItem {
+public class LinkItem implements LinkClickListener {
 
     private final String linkName;
     public final String linkURL;
+
+    public static final String INSTANCE_KEY = "INSTANCE_KEY";
 
     public LinkItem(String linkName, String linkURL){
         this.linkName = linkName;
@@ -33,6 +35,15 @@ public class LinkItem {
         //TODO
         //Launch new Intent with the browser open to the URL
         Log.v("LinkItemClicked", "Link: " + getLinkName());
+    }
+
+
+    static String generateNameKey(int index){
+        return INSTANCE_KEY + index + "na";
+    }
+
+    static String generateURLKey(int index){
+        return INSTANCE_KEY + index + "ur";
     }
 
 }
