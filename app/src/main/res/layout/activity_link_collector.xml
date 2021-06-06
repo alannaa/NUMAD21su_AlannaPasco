@@ -7,7 +7,7 @@
     tools:context=".LinkCollector">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/recycler_view_id"
         android:layout_width="399dp"
         android:layout_height="600dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,6 +20,7 @@
         android:id="@+id/link_collector_FAB_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="47dp"
         android:clickable="true"
