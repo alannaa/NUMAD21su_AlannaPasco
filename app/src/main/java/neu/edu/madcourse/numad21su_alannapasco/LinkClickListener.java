@@ -11,4 +11,6 @@ package neu.edu.madcourse.numad21su_alannapasco;
  */
 public interface LinkClickListener {
     void onItemClick(int index);
+
+    //void onItemHold(int index);
 }

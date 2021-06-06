@@ -37,7 +37,6 @@ public class LinkItem implements LinkClickListener {
         Log.v("LinkItemClicked", "Link: " + getLinkName());
     }
 
-
     static String generateNameKey(int index){
         return INSTANCE_KEY + index + "na";
     }

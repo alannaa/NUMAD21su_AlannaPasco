@@ -18,9 +18,11 @@ public class RecViewAdapter extends RecyclerView.Adapter<RecViewHolder> {
         this.linkList = linkList;
     }
 
-    public void setOnListClickListener(LinkClickListener listener) {
+    public void setOnClickListener(LinkClickListener listener) {
         this.listener = listener;
     }
+
+
 
     @Override
     public RecViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -41,5 +43,9 @@ public class RecViewAdapter extends RecyclerView.Adapter<RecViewHolder> {
     @Override
     public int getItemCount(){
         return linkList.size();
+    }
+
+    public boolean linkListContains(LinkItem li) {
+        return linkList.contains(li);
     }
 }

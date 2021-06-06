@@ -1,18 +1,21 @@
 package neu.edu.madcourse.numad21su_alannapasco;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.widget.Button;
+import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /*
     Activity containing the Link Collector feature
@@ -23,10 +26,11 @@ import java.util.Random;
         -RecViewAdapter         bridges the backend LinkItems to frontend RecViewHolder
         -RecViewHolder          manages what's in item_card.xml
  */
-public class LinkCollector extends AppCompatActivity {
+public class LinkCollector extends AppCompatActivity implements LinkDialogue.LinkDialogueListener {
 
     private ArrayList<LinkItem> linkList = new ArrayList<>();
 
+    FloatingActionButton addLinkFAB;
     private RecyclerView recView;
     private RecViewAdapter recViewAdapter;
     private RecyclerView.LayoutManager recLayoutManger;
@@ -40,25 +44,51 @@ public class LinkCollector extends AppCompatActivity {
 
         init(savedInstanceState);
 
-        FloatingActionButton addLinkFAB = findViewById(R.id.link_collector_FAB_id);
-        addLinkFAB.setOnClickListener(v -> fabListener());
+        addLinkFAB = findViewById(R.id.link_collector_FAB_id);
+        addLinkFAB.setOnClickListener(this::fabListener);
 
-        //TODO Item touch helper (swipe right/left)
+        //Specify swipe actions: swiping left OR right deletes item
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper
+                .SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
+            @Override
+            public boolean onMove(RecyclerView rv, RecyclerView.ViewHolder vh, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder vh, int dir) {
+                Toast.makeText(LinkCollector.this, "Deleted an item", Toast.LENGTH_SHORT).show();
+                int position = vh.getLayoutPosition();
+                linkList.remove(position);
+
+                recViewAdapter.notifyItemRemoved(position);
+            }
+        });
+        itemTouchHelper.attachToRecyclerView(recView);
     }
 
-    // Allows User to add a link to the link collector via a custom dialogue
-    // after the new link is added, a snackbar is displayed with the outcome of the add
-    public void fabListener() {
+    // Allows User to add a link to the link collector via a dialogue box
+    // this method simply flows to the dialogue box
+    public void fabListener(View view) {
+        LinkDialogue linkDialogue = new LinkDialogue(view);
+        linkDialogue.show(getSupportFragmentManager(), "link dialog");
+    }
+
+    @Override
+    public void processLinkItem(View parentView, String linkName, String linkURL) {
         //Always add to top of list; posn set to 0 always
         int newItemPosn = 0;
-        //TODO: DIALOGUE BOX
-
-        linkList.add(newItemPosn, new LinkItem("EXAMPLE NAME",  "example url . com"));
+        LinkItem newItem = new LinkItem(linkName,  linkURL);
+        linkList.add(newItemPosn, newItem);
         recViewAdapter.notifyItemInserted(newItemPosn);
-
-        //TODO SNACKBAR
+        String msg = "New link added successfully";
+        if(!recViewAdapter.linkListContains(newItem)){
+            msg ="Something went wrong; Try again";
+        }
+        Snackbar.make(parentView, msg, Snackbar.LENGTH_SHORT)
+                .setAction("Action", null).show();
     }
-
 
     /////////////// Accommodate config changes ///////////////
     //Handle orientation changes
@@ -104,7 +134,7 @@ public class LinkCollector extends AppCompatActivity {
         recView.setHasFixedSize(true);
 
         recViewAdapter = new RecViewAdapter(linkList);
-        LinkClickListener icl = new LinkClickListener() {
+        LinkClickListener lcl = new LinkClickListener() {
             @Override
             public void onItemClick(int index) {
                 //attributions bond to the item has changed
@@ -112,7 +142,7 @@ public class LinkCollector extends AppCompatActivity {
                 recViewAdapter.notifyItemChanged(index);
             }
         };
-        recViewAdapter.setOnListClickListener(icl);
+        recViewAdapter.setOnClickListener(lcl);
         recView.setAdapter(recViewAdapter);
         recView.setLayoutManager(recLayoutManger);
 
