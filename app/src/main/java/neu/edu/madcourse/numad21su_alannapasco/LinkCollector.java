@@ -115,6 +115,7 @@ public class LinkCollector extends AppCompatActivity {
         recViewAdapter.setOnListClickListener(icl);
         recView.setAdapter(recViewAdapter);
         recView.setLayoutManager(recLayoutManger);
+
     }
     /////////////// End: Accommodate config changes ///////////////
 }
