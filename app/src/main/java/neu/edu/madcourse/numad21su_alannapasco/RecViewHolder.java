@@ -20,6 +20,8 @@ public class RecViewHolder extends RecyclerView.ViewHolder {
         itemView.setOnClickListener(v -> {
             if (listener != null) {
                 int index = getLayoutPosition();
+                //catch in the event user updates list and updates are not complete before
+                //they click a link again (rare, updates happen in milliseconds)
                 if (index != RecyclerView.NO_POSITION) {
                     listener.onItemClick(index);
                 }

@@ -32,7 +32,8 @@ public class RecViewAdapter extends RecyclerView.Adapter<RecViewHolder> {
     @Override
     public void onBindViewHolder(RecViewHolder holder, int index) {
         LinkItem curItem = linkList.get(index);
-
+        //This code has been slightly changed from the lecture:
+        //I moved the setters to the Holder class to avoid such tight coupling/interclass-reliance
         holder.setItemName(curItem.getLinkName());
         holder.setItemDescr(curItem.getLinkURL());
     }
