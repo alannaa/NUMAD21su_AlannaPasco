@@ -9,15 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_lana_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NUMAD21SuAlannaPasco">
-        <activity android:name=".LinkCollector"></activity>
+        <activity
+            android:name=".LinkCollector"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ClickyActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".AboutActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize">
