@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#5BB86767"
+    android:background="@color/primary_background"
     tools:context=".MainActivity">
 
     <TextView
@@ -31,10 +31,23 @@
         android:text="@string/about_button_string"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hello_world_text_id"
-        app:layout_constraintVertical_bias="0.703" />
+        app:layout_constraintVertical_bias="0.407" />
+
+    <Button
+        android:id="@+id/link_collector_button_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/green_theme_button"
+        android:text="@string/link_collector_button_string"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clicky_button_id"
+        app:layout_constraintVertical_bias="0.183" />
 
     <Button
         android:id="@+id/clicky_button_id"
@@ -42,11 +55,11 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#7A963000"
         android:text="@string/clicky_button_string"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/link_collector_button_id"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/about_button_id"
-        app:layout_constraintVertical_bias="0.29" />
+        app:layout_constraintVertical_bias="0.101" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

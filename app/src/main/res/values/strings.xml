@@ -13,6 +13,7 @@
     <string name="E_string">E</string>
     <string name="F_string">F</string>
     <string name="pressed_string">Pressed: </string>
+    <string name="link_collector_button_string">Link Collector </string>
 
 
 </resources>

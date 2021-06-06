@@ -13,4 +13,5 @@
     <string name="E_string">ي</string>
     <string name="F_string">ف</string>
     <string name="pressed_string">"ضغطت: "</string>
+    <string name="link_collector_button_string">Link Collector </string>
 </resources>

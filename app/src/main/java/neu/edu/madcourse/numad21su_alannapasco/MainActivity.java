@@ -9,12 +9,8 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final String TAG = "MainActivity";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.v(TAG, "MainActivity onCreate()");
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -23,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
 
         Button clickyButton = findViewById(R.id.clicky_button_id);
         clickyButton.setOnClickListener(v -> clickyButtonListener());
+
+        Button linkCButton = findViewById(R.id.link_collector_button_id);
+        linkCButton.setOnClickListener(v -> linkCButtonListener());
     }
 
 
@@ -38,39 +37,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-
-
-    //Utility methods to learn the activity lifecycle
-    @Override
-    protected void onStart(){
-        Log.v(TAG, "MainActivity onStart()");
-        super.onStart();
+    // Uses new Intent to create a flow between this interface and the 'Link Collector' page
+    public void linkCButtonListener() {
+        Intent intent = new Intent(this, LinkCollector.class);
+        startActivity(intent);
     }
-
-    @Override
-    protected void onResume(){
-        Log.v(TAG, "MainActivity onResume()");
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause(){
-        Log.v(TAG, "MainActivity onPause()");
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop(){
-        Log.v(TAG, "MainActivity onStop()");
-        super.onStop();
-    }
-
-    @Override
-    protected void onDestroy(){
-        Log.v(TAG, "MainActivity onDestroy()");
-        super.onDestroy();
-    }
-
 
 }
