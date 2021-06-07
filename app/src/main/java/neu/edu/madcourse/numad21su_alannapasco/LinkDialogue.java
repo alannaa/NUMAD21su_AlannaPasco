@@ -5,9 +5,12 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Patterns;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
 
@@ -39,21 +42,51 @@ public class LinkDialogue extends AppCompatDialogFragment {
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        //Cancelling closes the dialog box
                     }
                 })
                 .setPositiveButton("save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String linkName = editTextName.getText().toString();
-                        String linkURL = editTextURL.getText().toString();
-                        listener.processLinkItem(parentView, linkName, linkURL);
+                        //onClick is over ridden below to enforce correctly formatted input
                     }
                 });
         editTextName = view.findViewById(R.id.edit_name_id);
         editTextURL = view.findViewById(R.id.edit_url_id);
 
-        return builder.create();
+        AlertDialog d = builder.create();
+        d.show();
+        d.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> onClickSaveButton(d));
+        return d;
+    }
+
+    //Handle the intricacies of the 'save' button
+    // - error when name/URL omitted or URL not formatted correctly
+    // - if no errors, process the new link item
+    public void onClickSaveButton(AlertDialog d){
+        String linkName = editTextName.getText().toString();
+        String linkURL = editTextURL.getText().toString();
+        boolean errors = false;
+
+        if (linkName.isEmpty() || linkURL.isEmpty()) {
+            Toast t = Toast.makeText(parentView.getContext(), "Name and URL required",
+                    Toast.LENGTH_SHORT);
+            t.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+            t.show();
+            errors = true;
+        }
+
+        if (!linkURL.isEmpty() && !Patterns.WEB_URL.matcher(editTextURL.getText().toString()).matches()) {
+            Toast t = Toast.makeText(parentView.getContext(), "Invalid URL",
+                    Toast.LENGTH_SHORT);
+            t.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+            t.show();
+            errors = true;
+        }
+        if (!errors) {
+            listener.processLinkItem(parentView, linkName, linkURL);
+            d.dismiss();
+        }
     }
 
     @Override

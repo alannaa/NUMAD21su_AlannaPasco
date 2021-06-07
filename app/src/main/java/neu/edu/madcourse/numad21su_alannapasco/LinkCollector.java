@@ -77,7 +77,6 @@ public class LinkCollector extends AppCompatActivity implements LinkDialogue.Lin
 
     @Override
     public void processLinkItem(View parentView, String linkName, String linkURL) {
-        //Always add to top of list; posn set to 0 always
         int newItemPosn = 0;
         LinkItem newItem = new LinkItem(linkName,  linkURL);
         linkList.add(newItemPosn, newItem);
@@ -136,9 +135,14 @@ public class LinkCollector extends AppCompatActivity implements LinkDialogue.Lin
         recViewAdapter = new RecViewAdapter(linkList);
         LinkClickListener lcl = new LinkClickListener() {
             @Override
-            public void onItemClick(int index) {
+            public void onItemClick(View view, int index) {
                 //attributions bond to the item has changed
-                linkList.get(index).onItemClick(index);
+                linkList.get(index).onItemClick(view, index);
+                recViewAdapter.notifyItemChanged(index);
+            }
+            @Override
+            public void onItemHold(View view, int index) {
+                linkList.get(index).onItemHold(view, index);
                 recViewAdapter.notifyItemChanged(index);
             }
         };

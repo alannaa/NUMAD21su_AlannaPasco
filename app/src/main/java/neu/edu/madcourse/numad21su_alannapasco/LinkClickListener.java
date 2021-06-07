@@ -1,5 +1,7 @@
 package neu.edu.madcourse.numad21su_alannapasco;
 
+import android.view.View;
+
 /*
     Interface for LinkItem
     Components needed:
@@ -10,7 +12,7 @@ package neu.edu.madcourse.numad21su_alannapasco;
         -RecViewHolder          manages what's in item_card.xml
  */
 public interface LinkClickListener {
-    void onItemClick(int index);
+    void onItemClick(View view, int index);
 
-    //void onItemHold(int index);
+    void onItemHold(View view, int index);
 }

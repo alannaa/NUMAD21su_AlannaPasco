@@ -23,9 +23,18 @@ public class RecViewHolder extends RecyclerView.ViewHolder {
                 //catch in the event user updates list and updates are not complete before
                 //they click a link again (rare, updates happen in milliseconds)
                 if (index != RecyclerView.NO_POSITION) {
-                    listener.onItemClick(index);
+                    listener.onItemClick(itemView, index);
                 }
             }
+        });
+        itemView.setOnLongClickListener(v -> {
+           if (listener != null) {
+               int index = getLayoutPosition();
+               if (index != RecyclerView.NO_POSITION) {
+                   listener.onItemHold(itemView, index);
+               }
+           }
+           return true;
         });
     }
 

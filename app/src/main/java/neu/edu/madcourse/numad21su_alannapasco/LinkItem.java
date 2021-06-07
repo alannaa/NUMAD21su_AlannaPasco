@@ -1,6 +1,13 @@
 package neu.edu.madcourse.numad21su_alannapasco;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 /*
     Represents one single item in the LinkCollector feature
@@ -23,18 +30,49 @@ public class LinkItem implements LinkClickListener {
         this.linkURL = linkURL;
     }
 
+    @Override
+    public void onItemClick(View view, int index){
+        String properURL = ensureURLFormat(this.linkURL);
+        Intent intent = new Intent(Intent.ACTION_VIEW,
+                Uri.parse(properURL));
+        try {
+            view.getContext().startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(view.getContext(), "Error: browner cannot open this link",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    //Will make up for the fact that users may save URLs in any of the following format:
+    // - google.com
+    // - www.google.com
+    // - https://www.google.com
+    private String ensureURLFormat(String URL){
+        //Must check that URL.length is > 11 to avoid string index out of bounds error
+        if(URL.length() > 11 && URL.substring(0,12).equals("https://www.")){
+            return URL;
+        } if (URL.substring(0,4).equals("www.")){
+            return "https://" + URL;
+        }
+        //If the URL is less than 11 characters, or isn't formatted correctly,
+        //prefix the essential 11 characters to the URL
+        return "https://www." + URL;
+    }
+
+    @Override
+    public void onItemHold(View view, int index){
+        Log.v("ONITEMHOLD _________", "ITEM HELD");
+        //Attempted to implement the ability to edit URL from holding down the item
+        //however could not get this to work due to the difficulty of getting the dialogue
+        //box to work from this class
+    }
+
     public String getLinkName(){
         return this.linkName;
     }
 
     public String getLinkURL(){
         return this.linkURL;
-    }
-
-    public void onItemClick(int index){
-        //TODO
-        //Launch new Intent with the browser open to the URL
-        Log.v("LinkItemClicked", "Link: " + getLinkName());
     }
 
     static String generateNameKey(int index){
