@@ -22,6 +22,11 @@ public class MainActivity extends AppCompatActivity {
 
         Button linkCButton = findViewById(R.id.link_collector_button_id);
         linkCButton.setOnClickListener(v -> linkCButtonListener());
+
+        Button locatorButton = findViewById(R.id.locator_button_id);
+        locatorButton.setOnClickListener(v -> locatorButtonListener());
+
+
     }
 
 
@@ -31,15 +36,18 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // Uses new Intent to create a flow between this interface and the 'clicky' page
     public void clickyButtonListener() {
         Intent intent = new Intent(this, ClickyActivity.class);
         startActivity(intent);
     }
 
-    // Uses new Intent to create a flow between this interface and the 'Link Collector' page
     public void linkCButtonListener() {
         Intent intent = new Intent(this, LinkCollector.class);
+        startActivity(intent);
+    }
+
+    public void locatorButtonListener() {
+        Intent intent = new Intent(this, Locator.class);
         startActivity(intent);
     }
 

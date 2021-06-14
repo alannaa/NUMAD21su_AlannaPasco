@@ -14,4 +14,7 @@
     <string name="F_string">ف</string>
     <string name="pressed_string">"ضغطت: "</string>
     <string name="link_collector_button_string">Link Collector </string>
+    <string name="long_label">Longitude</string>
+    <string name="lat_label">Latitude</string>
+    <string name="locator_header">Where in the world am I?</string>
 </resources>

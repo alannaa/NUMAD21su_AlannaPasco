@@ -14,56 +14,55 @@
         android:layout_height="wrap_content"
         android:text="@string/hello_world_string"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="82dp" />
+        tools:layout_editor_absoluteY="51dp" />
 
     <Button
         android:id="@+id/about_button_id"
-        android:layout_width="391dp"
-        android:layout_height="wrap_content"
+        android:layout_width="175dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="120dp"
         android:backgroundTint="#92B7A23A"
         android:fontFamily="serif"
         android:text="@string/about_button_string"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.315" />
+        tools:layout_editor_absoluteY="99dp" />
 
     <Button
         android:id="@+id/link_collector_button_id"
-        android:layout_width="391dp"
-        android:layout_height="wrap_content"
+        android:layout_width="175dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="120dp"
         android:backgroundTint="@color/muave_contrast_grey"
         android:text="@string/link_collector_button_string"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.44" />
+        tools:layout_editor_absoluteY="147dp" />
 
     <Button
         android:id="@+id/clicky_button_id"
-        android:layout_width="391dp"
-        android:layout_height="wrap_content"
+        android:layout_width="175dp"
+        android:layout_height="48dp"
         android:backgroundTint="@color/muave_contrast_green"
         android:text="@string/clicky_button_string"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.587" />
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toEndOf="@+id/link_collector_button_id"
+        tools:layout_editor_absoluteY="152dp" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="about_button_id" />
 
     <Button
         android:id="@+id/locator_button_id"
-        android:layout_width="391dp"
-        android:layout_height="wrap_content"
+        android:layout_width="175dp"
+        android:layout_height="48dp"
         android:text="Locator"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.729" />
+        app:layout_constraintHorizontal_bias="0.463"
+        app:layout_constraintStart_toEndOf="@+id/about_button_id"
+        tools:layout_editor_absoluteY="106dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -58,11 +58,11 @@ public class LinkCollector extends AppCompatActivity implements LinkDialogue.Lin
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder vh, int dir) {
-                Toast.makeText(LinkCollector.this, "Deleted an item", Toast.LENGTH_SHORT).show();
                 int position = vh.getLayoutPosition();
                 linkList.remove(position);
-
                 recViewAdapter.notifyItemRemoved(position);
+
+                Toast.makeText(LinkCollector.this, "Deleted an item", Toast.LENGTH_SHORT).show();
             }
         });
         itemTouchHelper.attachToRecyclerView(recView);
