@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="neu.edu.madcourse.numad21su_alannapasco">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -11,14 +13,17 @@
         android:roundIcon="@mipmap/ic_launcher_lana_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NUMAD21SuAlannaPasco">
-        <activity android:name=".Locator"></activity>
+        <activity
+            android:name=".Locator.Locator"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".LinkCollector"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ClickyActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".AboutActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Locator">
+    tools:context=".Locator.Locator">
 
     <TextView
         android:id="@+id/locator_header_id"
@@ -26,6 +26,7 @@
         android:text="@string/long_label"
         android:textColor="#AD0B0A0A"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -40,6 +41,7 @@
         android:text="@string/lat_label"
         android:textColor="#AD0B0A0A"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -61,7 +63,7 @@
         app:layout_constraintVertical_bias="0.097" />
 
     <TextView
-        android:id="@+id/cur_pressed_msg_id"
+        android:id="@+id/lat_value_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/no_value_string"

@@ -4,8 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
+
+import neu.edu.madcourse.numad21su_alannapasco.Locator.Locator;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
         Button locatorButton = findViewById(R.id.locator_button_id);
         locatorButton.setOnClickListener(v -> locatorButtonListener());
-
 
     }
 
