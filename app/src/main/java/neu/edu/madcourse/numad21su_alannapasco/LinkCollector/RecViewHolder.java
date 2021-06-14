@@ -1,8 +1,10 @@
-package neu.edu.madcourse.numad21su_alannapasco;
+package neu.edu.madcourse.numad21su_alannapasco.LinkCollector;
 
 import android.view.View;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import neu.edu.madcourse.numad21su_alannapasco.R;
 
 /*
     A generalized RecycleView ViewHolder for a layout that has an item name and description

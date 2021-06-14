@@ -24,7 +24,7 @@
         tools:layout="@layout/activity_about" />
     <activity
         android:id="@+id/clickyActivity"
-        android:name="neu.edu.madcourse.numad21su_alannapasco.ClickyActivity"
+        android:name="neu.edu.madcourse.numad21su_alannapasco.Clicky.ClickyActivity"
         android:label="activity_clicky"
         tools:layout="@layout/activity_clicky" />
 </navigation>

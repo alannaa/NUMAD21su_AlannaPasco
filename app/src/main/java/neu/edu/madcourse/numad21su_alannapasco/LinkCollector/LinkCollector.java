@@ -1,13 +1,11 @@
-package neu.edu.madcourse.numad21su_alannapasco;
+package neu.edu.madcourse.numad21su_alannapasco.LinkCollector;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -16,6 +14,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+
+import neu.edu.madcourse.numad21su_alannapasco.R;
 
 /*
     Activity containing the Link Collector feature

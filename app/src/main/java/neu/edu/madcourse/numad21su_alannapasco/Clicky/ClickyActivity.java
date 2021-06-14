@@ -1,4 +1,4 @@
-package neu.edu.madcourse.numad21su_alannapasco;
+package neu.edu.madcourse.numad21su_alannapasco.Clicky;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import neu.edu.madcourse.numad21su_alannapasco.R;
 
 //Activity manager of Clicky page UI
 public class ClickyActivity extends AppCompatActivity {

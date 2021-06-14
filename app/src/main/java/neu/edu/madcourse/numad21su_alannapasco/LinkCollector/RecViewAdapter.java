@@ -1,10 +1,12 @@
-package neu.edu.madcourse.numad21su_alannapasco;
+package neu.edu.madcourse.numad21su_alannapasco.LinkCollector;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
+
+import neu.edu.madcourse.numad21su_alannapasco.R;
 
 /*
     Bridges ArrayList of LinkItems to interactive RecyclerView

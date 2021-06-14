@@ -1,4 +1,4 @@
-package neu.edu.madcourse.numad21su_alannapasco;
+package neu.edu.madcourse.numad21su_alannapasco.LinkCollector;
 
 import android.view.View;
 

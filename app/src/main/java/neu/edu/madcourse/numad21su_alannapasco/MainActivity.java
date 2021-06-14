@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import neu.edu.madcourse.numad21su_alannapasco.Clicky.ClickyActivity;
+import neu.edu.madcourse.numad21su_alannapasco.LinkCollector.LinkCollector;
 import neu.edu.madcourse.numad21su_alannapasco.Locator.Locator;
 
 public class MainActivity extends AppCompatActivity {

@@ -18,10 +18,10 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".LinkCollector"
+            android:name=".LinkCollector.LinkCollector"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".ClickyActivity"
+            android:name=".Clicky.ClickyActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:parentActivityName=".MainActivity" />
         <activity

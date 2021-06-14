@@ -17,8 +17,6 @@ import neu.edu.madcourse.numad21su_alannapasco.R;
 
 public class Locator extends AppCompatActivity implements LocationListener {
 
-    Double longitude;
-    Double latitude;
     TextView longitudeText;
     TextView latitudeText;
     LocationManager locManager;
@@ -28,11 +26,12 @@ public class Locator extends AppCompatActivity implements LocationListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_locator);
 
-        TextView longitudeText = findViewById(R.id.long_value_id);
-        TextView latitudeText = findViewById(R.id.lat_value_id);
+        longitudeText = findViewById(R.id.long_value_id);
+        latitudeText = findViewById(R.id.lat_value_id);
 
         locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
+        //PERMISSIONS
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED &&
@@ -44,22 +43,25 @@ public class Locator extends AppCompatActivity implements LocationListener {
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,
                             Manifest.permission.ACCESS_COARSE_LOCATION}, 101);
         }
+
+        //REQUEST LOCATION UPDATES
         locManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 3000, 0, this);
-
         Location location = locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        if (location != null) {
-            latitude = location.getLatitude();
-            longitude = location.getLongitude();
+
+        //GET THE LONG/LAT AND DISPLAY
+        onLocationChanged(location);
+
+        //STOP TRACKING, RELEASE RESOURCES
+        if(locManager!=null){
+            locManager.removeUpdates(this);
         }
-
-        longitudeText.setText(longitude.toString());
-        latitudeText.setText(latitude.toString());
-
     }
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
-        latitude = location.getLatitude();
-        longitude = location.getLongitude();
+        Double latitude = location.getLatitude();
+        Double longitude = location.getLongitude();
+        longitudeText.setText(longitude.toString());
+        latitudeText.setText(latitude.toString());
     }
 }

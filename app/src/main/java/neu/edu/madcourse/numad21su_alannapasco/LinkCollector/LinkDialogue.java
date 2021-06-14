@@ -1,4 +1,4 @@
-package neu.edu.madcourse.numad21su_alannapasco;
+package neu.edu.madcourse.numad21su_alannapasco.LinkCollector;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -15,6 +15,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import java.util.Objects;
+
+import neu.edu.madcourse.numad21su_alannapasco.R;
 
 public class LinkDialogue extends AppCompatDialogFragment {
 

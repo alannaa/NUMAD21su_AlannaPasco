@@ -1,4 +1,4 @@
-package neu.edu.madcourse.numad21su_alannapasco;
+package neu.edu.madcourse.numad21su_alannapasco.LinkCollector;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -6,8 +6,6 @@ import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
-import com.google.android.material.snackbar.Snackbar;
 
 /*
     Represents one single item in the LinkCollector feature
