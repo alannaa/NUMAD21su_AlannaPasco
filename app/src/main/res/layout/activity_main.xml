@@ -25,7 +25,7 @@
         android:id="@+id/about_button_id"
         android:layout_width="391dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="#92B7A23A"
+        android:backgroundTint="@color/muave_background"
         android:fontFamily="serif"
         android:text="@string/about_button_string"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,7 +38,7 @@
         android:id="@+id/link_collector_button_id"
         android:layout_width="391dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/muave_contrast_grey"
+        android:backgroundTint="@color/muave_background"
         android:text="@string/link_collector_button_string"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +50,7 @@
         android:id="@+id/clicky_button_id"
         android:layout_width="391dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/muave_contrast_green"
+        android:backgroundTint="@color/muave_background"
         android:text="@string/clicky_button_string"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,5 +69,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.717" />
+
+    <Button
+        android:id="@+id/service_button_id"
+        android:layout_width="391dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/muave_contrast_green"
+        android:fontFamily="serif"
+        android:text="@string/ays_button_string"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.841" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

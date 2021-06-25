@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_lana_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NUMAD21SuAlannaPasco">
+        <activity android:name=".AtYourService.AtYourService"></activity>
         <activity
             android:name=".Locator.Locator"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -37,6 +38,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

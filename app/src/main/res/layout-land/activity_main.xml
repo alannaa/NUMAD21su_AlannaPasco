@@ -13,41 +13,50 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_world_string"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="51dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.182" />
 
     <Button
         android:id="@+id/about_button_id"
         android:layout_width="175dp"
         android:layout_height="48dp"
-        android:layout_marginStart="120dp"
-        android:backgroundTint="#92B7A23A"
+        android:layout_marginStart="100dp"
+        android:backgroundTint="@color/muave_background"
         android:fontFamily="serif"
         android:text="@string/about_button_string"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="99dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.307" />
 
     <Button
         android:id="@+id/link_collector_button_id"
         android:layout_width="175dp"
         android:layout_height="48dp"
-        android:layout_marginStart="120dp"
-        android:backgroundTint="@color/muave_contrast_grey"
+        android:layout_marginStart="100dp"
+        android:backgroundTint="@color/muave_background"
         android:text="@string/link_collector_button_string"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="147dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.537" />
 
     <Button
         android:id="@+id/clicky_button_id"
         android:layout_width="175dp"
         android:layout_height="48dp"
-        android:backgroundTint="@color/muave_contrast_green"
+        android:backgroundTint="@color/muave_background"
         android:text="@string/clicky_button_string"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toEndOf="@+id/link_collector_button_id"
-        tools:layout_editor_absoluteY="152dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.537" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group"
@@ -59,10 +68,27 @@
         android:id="@+id/locator_button_id"
         android:layout_width="175dp"
         android:layout_height="48dp"
-        android:text="Locator"
+        android:backgroundTint="@color/muave_background"
+        android:text="@string/locator_button_string"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.463"
+        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toEndOf="@+id/about_button_id"
-        tools:layout_editor_absoluteY="106dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.307" />
+
+    <Button
+        android:id="@+id/service_button_id"
+        android:layout_width="391dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/muave_contrast_green"
+        android:fontFamily="serif"
+        android:text="@string/ays_button_string"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.749" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,18 +4,19 @@
     <string name="hello_world_string">اهلا بالعالم!</string>
     <string name="about_button_string">عن حالي</string>
     <string name="about_text_string">الانا باسكو | pasco.a@northeastern.edu</string>
-    <string name="lang_button_string">الانجليزية</string>
     <string name="clicky_button_string">كلكي</string>
     <string name="A_string">ا</string>
     <string name="B_string">ب</string>
     <string name="C_string">ت</string>
-    <string name="D_string">س</string>
-    <string name="E_string">ي</string>
-    <string name="F_string">ف</string>
+    <string name="D_string">ث</string>
+    <string name="E_string">ج</string>
+    <string name="F_string">ح</string>
     <string name="pressed_string">"ضغطت: "</string>
     <string name="link_collector_button_string">Link Collector </string>
     <string name="long_label">Longitude</string>
     <string name="lat_label">Latitude</string>
-    <string name="locator_header">Where in the world am I?</string>
-    <string name="locator_button_string">Locator</string>
+    <string name="locator_header">وين انا؟</string>
+    <string name="locator_button_string">وين انا؟</string>
+    <string name="ays_button_string">ممكن اساعدك؟</string>
+    <string name="ays_header_string">Flying on a budget? allow me to help...</string>
 </resources>
