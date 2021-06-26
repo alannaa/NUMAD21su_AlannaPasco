@@ -78,7 +78,7 @@
         app:layout_constraintVertical_bias="0.307" />
 
     <Button
-        android:id="@+id/service_button_id"
+        android:id="@+id/ays_button_id"
         android:layout_width="391dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/muave_contrast_green"

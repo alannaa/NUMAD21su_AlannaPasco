@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import neu.edu.madcourse.numad21su_alannapasco.AtYourService.AtYourService;
 import neu.edu.madcourse.numad21su_alannapasco.Clicky.ClickyActivity;
 import neu.edu.madcourse.numad21su_alannapasco.LinkCollector.LinkCollector;
 import neu.edu.madcourse.numad21su_alannapasco.Locator.Locator;
@@ -29,8 +30,10 @@ public class MainActivity extends AppCompatActivity {
         Button locatorButton = findViewById(R.id.locator_button_id);
         locatorButton.setOnClickListener(v -> locatorButtonListener());
 
-    }
+        Button aysButton = findViewById(R.id.ays_button_id);
+        aysButton.setOnClickListener(v -> aysButtonListener());
 
+    }
 
     // Uses new Intent to create a flow between this interface and the 'about' page
     public void aboutButtonListener() {
@@ -50,6 +53,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void locatorButtonListener() {
         Intent intent = new Intent(this, Locator.class);
+        startActivity(intent);
+    }
+
+    public void aysButtonListener() {
+        Intent intent = new Intent(this, AtYourService.class);
         startActivity(intent);
     }
 

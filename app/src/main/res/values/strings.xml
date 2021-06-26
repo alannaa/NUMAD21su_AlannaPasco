@@ -18,7 +18,8 @@
     <string name="locator_header">Where in the world am I?</string>
     <string name="locator_button_string">Locator</string>
     <string name="ays_button_string">at your service…</string>
-    <string name="ays_header_string">Flying on a budget? Allow me to help…</string>
+    <string name="ays_header_string">Flying on a budget? Allow us to help…</string>
+    <string name="queryAPI_button_string">Let\'s Go!</string>
 
 
 </resources>

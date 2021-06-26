@@ -18,5 +18,6 @@
     <string name="locator_header">وين انا؟</string>
     <string name="locator_button_string">وين انا؟</string>
     <string name="ays_button_string">ممكن اساعدك؟</string>
-    <string name="ays_header_string">Flying on a budget? allow me to help...</string>
+    <string name="ays_header_string">Flying on a budget? allow us to help…</string>
+    <string name="queryAPI_button_string">Let\'s Go!</string>
 </resources>
