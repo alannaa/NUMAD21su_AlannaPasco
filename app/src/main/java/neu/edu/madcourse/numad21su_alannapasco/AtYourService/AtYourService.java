@@ -2,81 +2,170 @@ package neu.edu.madcourse.numad21su_alannapasco.AtYourService;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
+
+import neu.edu.madcourse.numad21su_alannapasco.AboutActivity;
+import neu.edu.madcourse.numad21su_alannapasco.LinkCollector.LinkCollector;
 import neu.edu.madcourse.numad21su_alannapasco.R;
 
 public class AtYourService extends AppCompatActivity {
 
-    private Handler thHandler = new Handler();
+    //TODO: make main activity TILES
+    //TODO: add checkbox to automate "anytime" flights
+    //TODO: handle layout errors
+
+    //For simplicity, defaults include:
+    //Country == US ; Currency == USD ; Locale == en-US
+    private final String DEFAULTS_QUOTES = "/apiservices/browsequotes/v1.0/US/USD/en-US";
+    private final String DEFAULTS_PLACES = "/apiservices/autosuggest/v1.0/US/USD/en-US";
+    private final String apiHost = "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com";
+    private final String apiKey = "d464289547msh88d10c92e7e7c93p14eb4djsn3874fe4ced5d";
+    String errMsg = "";
+    private final Handler thHandler = new Handler();
+
+    private EditText depart, destin, departDate, returnDate;
     ImageView loadingAnimation;
     Button queryAPIbutton;
+    JSONObject results;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_at_your_service);
 
+        depart = findViewById(R.id.depart_input_id);
+        destin = findViewById(R.id.destin_input_id);
+        departDate = findViewById(R.id.depart_date_input_id);
+        returnDate = findViewById(R.id.return_date_input_id);
+
         queryAPIbutton = findViewById(R.id.queryAPI_button_id);
         queryAPIbutton.setOnClickListener(v -> queryAPIonSeparateRunnableThread());
-
         loadingAnimation = findViewById(R.id.loading_animation_id);
-
-        //Defaults:
-        // Country: US
-        // Currency: USD
-        // Locality: en-US
-        //What we'll need to interact with:
-        //originplace
-            //Need to query database for code translation
-        //destinationplace
-            //Need to query database for code translation
-        //Dropdown:
-            // Round trip -> displays both date boxes
-            // One way -> displays only departure date box, return set to " "
-        //CheckBox:
-        //Anytime - just find me the cheapest! (removes dates input boxes; set both any time)
-        //Departure Date - outboundpartialdate (optional)
-            //Specify YYYY-MM-DD or YYYY-MM or "anytime"(maybe default anytime)
-        //Return Date - inboundpartialdate (optional)
-            //empty string == one way  vs "anytime" means anytime
     }
 
     public void queryAPIonSeparateRunnableThread(){
         loadingAnimation.setVisibility(View.VISIBLE);
         queryAPIbutton.setVisibility(View.INVISIBLE);
-        Runnable query = new ScannerAPIQuery();
+        depart.setVisibility(View.INVISIBLE);
+        destin.setVisibility(View.INVISIBLE);
+        Intent intent = new Intent(this, AYSResultsPage.class);
+        Runnable query = new ScannerAPIQuery(intent);
         new Thread(query).start();
     }
 
     //Class that implements the Runnable interface and queries the Scanner API
     class ScannerAPIQuery implements Runnable {
+
+        Intent resultsPage;
+
+        public ScannerAPIQuery(Intent resultsPage){
+            this.resultsPage = resultsPage;
+        }
+
         @Override
         public void run(){
-
-            //This is where you will query the API
-            //and send the results back to the UI Thread to display the results
-            Log.v("RUNNABLE", "!!!!running on different thread!!!!!!!!");
             try {
-                Thread.sleep(10000); // 10 seconds
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                URL endpoint = new URL(formatURLasString(
+                        formatPlaceCode(depart.getText().toString()),
+                        formatPlaceCode(destin.getText().toString()),
+                        departDate.getText().toString(), returnDate.getText().toString()));
+
+                HttpURLConnection conn = (HttpURLConnection) endpoint.openConnection();
+                conn.setRequestProperty("x-rapidapi-host", apiHost);
+                conn.setRequestProperty("x-rapidapi-key", apiKey);
+                conn.setRequestMethod("GET");
+                conn.connect();
+
+                // Read response.
+                InputStream inputStream = conn.getInputStream();
+                final String response = convertStreamToString(inputStream);
+
+                // Parse JSON
+                results =  new JSONObject(response);
+
+            } catch (IOException e) {
+                errMsg = "Sorry, there's an issue. Please check your network connection and " +
+                        "try again";
+            } catch (JSONException e) {
+                errMsg = "Sorry, something went wrong. Please try again.";
             }
-            Log.v("RUNNABLE", "!!!waking up!!!!!!!");
-
-
             thHandler.post(() -> {
-                //What you send back
+                //Callback data
                 loadingAnimation.setVisibility(View.INVISIBLE);
                 queryAPIbutton.setVisibility(View.VISIBLE);
+                depart.setVisibility(View.VISIBLE);
+                destin.setVisibility(View.VISIBLE);
+                if (!errMsg.equals("")) {
+                    Toast t = Toast.makeText(AtYourService.this, errMsg, Toast.LENGTH_SHORT);
+                    t.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+                    t.show();
+                    errMsg = "";
+                } else {
+                    startActivity(resultsPage);
+                }
             });
         }
+
+        private String convertStreamToString(InputStream is) {
+            Scanner s = new Scanner(is).useDelimiter("\\A");
+            return s.hasNext() ? s.next().replace(",", ",\n") : "";
+        }
+
+        private String formatURLasString(String depart, String destin, String departDate, String returnDate) {
+            String requiredInputs = "/" + depart + "/" + destin + "/" + departDate;
+            //Optional input, comes through as empty string if user leaves blank
+            if (!returnDate.equals("")){
+                requiredInputs += "/" + returnDate;
+            }
+            return "https://" + apiHost + DEFAULTS_QUOTES + requiredInputs + "/?rapidapi-key=" + apiKey;
+        }
+
+        private String formatPlaceCode(String place){
+            try {
+                URL endpoint = new URL("https://"
+                        + apiHost + DEFAULTS_PLACES
+                        + "/?query=" + place);
+                HttpURLConnection conn = (HttpURLConnection) endpoint.openConnection();
+                conn.setRequestProperty("x-rapidapi-key", apiKey);
+                conn.connect();
+
+                InputStream inputStream = conn.getInputStream();
+                final String response = convertStreamToString(inputStream);
+
+                JSONObject results =  new JSONObject(response);
+                JSONObject aPLace = results.getJSONArray("Places").getJSONObject(0);
+                String placeID = aPLace.getString("CityId");
+                return placeID;
+
+            } catch (IOException e) {
+                Log.v("PLACELOC_EXCEPTION", "io exception: " + e.toString());
+            } catch (JSONException e) {
+                Log.v("PLACELOC_EXCEPTION", "JSON exception" + e.toString());
+            }
+            return "";
+        }
     }
+
+
 
 }

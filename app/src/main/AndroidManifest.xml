@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -13,6 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_lana_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NUMAD21SuAlannaPasco">
+        <activity
+            android:name=".AtYourService.AYSResultsPage"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:parentActivityName=".AtYourService.AtYourService"/>
         <activity
             android:name=".AtYourService.AtYourService"
             android:configChanges="keyboardHidden|orientation|screenSize"

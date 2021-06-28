@@ -20,6 +20,14 @@
     <string name="ays_button_string">at your service…</string>
     <string name="ays_header_string">Flying on a budget? Allow us to help…</string>
     <string name="queryAPI_button_string">Let\'s Go!</string>
+    <string name="link_name_hint">Link Name</string>
+    <string name="link_url_hint">Link URL</string>
+    <string name="from_hint">From (required)</string>
+    <string name="to_hint">To (required)</string>
+    <string name="depart_date_hint">Leave YYYY-MM-DD (required)</string>
+    <string name="return_date_hint">Return YYYY-MM-DD (optional)</string>
+    <string name="ays_hint_string">Choose specific travel dates, or write \"anytime\" to view the cheapest options on any date! \n\n
+                                    Leave return date blank for a one-way trip.</string>
 
 
 </resources>

@@ -7,18 +7,18 @@
     tools:context=".AtYourService.AtYourService">
 
     <TextView
-    android:id="@+id/ays_header_id"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/ays_header_string"
-    android:textColor="#AD0B0A0A"
-    android:textSize="16sp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.496"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.028" />
+        android:id="@+id/ays_header_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ays_header_string"
+        android:textColor="#AD0B0A0A"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.028" />
 
 
     <TextView
@@ -36,6 +36,46 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.113" />
 
+    <EditText
+        android:id="@+id/depart_input_id"
+        android:layout_width="349dp"
+        android:layout_height="47dp"
+        android:hint="@string/from_hint"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.535"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.401" />
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/loading_animation_id"
+        android:layout_width="match_parent"
+        android:layout_height="276dp"
+        android:src="@drawable/animatedloading"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.558" />
+
+    <EditText
+        android:id="@+id/return_date_input_id"
+        android:layout_width="267dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/return_date_hint"
+        android:inputType="date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.628"
+        app:layout_constraintStart_toEndOf="@+id/depart_date_input_id"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.681" />
+
     <Button
         android:id="@+id/queryAPI_button_id"
         android:layout_width="wrap_content"
@@ -45,20 +85,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.762" />
+        app:layout_constraintVertical_bias="0.879" />
 
     <EditText
-        android:id="@+id/depart_input_id"
-        android:layout_width="349dp"
-        android:layout_height="47dp"
-        android:hint="@string/from_hint"
-        android:inputType="text"
+        android:id="@+id/depart_date_input_id"
+        android:layout_width="267dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:ems="10"
+        android:hint="@string/depart_date_hint"
+        android:inputType="date"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.564"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.329" />
+        app:layout_constraintVertical_bias="0.688" />
 
     <EditText
         android:id="@+id/destin_input_id"
@@ -68,48 +108,9 @@
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.564"
+        app:layout_constraintHorizontal_bias="0.535"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.411" />
+        app:layout_constraintVertical_bias="0.528" />
 
-    <EditText
-        android:id="@+id/depart_date_input_id"
-        android:layout_width="267dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/depart_date_hint"
-        android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.243"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/destin_input_id" />
-
-    <EditText
-        android:id="@+id/return_date_input_id"
-        android:layout_width="267dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:ems="10"
-        android:hint="@string/return_date_hint"
-        android:inputType="date"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.243"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/depart_date_input_id"
-        app:layout_constraintVertical_bias="0.004" />
-
-    <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/loading_animation_id"
-        android:layout_width="match_parent"
-        android:layout_height="251dp"
-        android:src="@drawable/planeloading"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.42" />
 </androidx.constraintlayout.widget.ConstraintLayout>
