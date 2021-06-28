@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,28 +23,23 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-import neu.edu.madcourse.numad21su_alannapasco.AboutActivity;
-import neu.edu.madcourse.numad21su_alannapasco.LinkCollector.LinkCollector;
 import neu.edu.madcourse.numad21su_alannapasco.R;
 
 public class AtYourService extends AppCompatActivity {
 
-    //TODO: handle layout errors
-    //TODO: test one way and anytime checkboxes
+    //TODO: potentially add feature to filter results inbound/outbound results
 
     //For simplicity, defaults include:
     //Country == US ; Currency == USD ; Locale == en-US
-    private final String DEFAULTS_QUOTES = "/apiservices/browsequotes/v1.0/US/USD/en-US";
-    private final String DEFAULTS_PLACES = "/apiservices/autosuggest/v1.0/US/USD/en-US";
-    private final String apiHost = "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com";
-    private final String apiKey = "d464289547msh88d10c92e7e7c93p14eb4djsn3874fe4ced5d";
-    private String errMsg = "";
+    private final static String DEFAULTS_QUOTES = "/apiservices/browseroutes/v1.0/US/USD/en-US";
+    private final static String DEFAULTS_PLACES = "/apiservices/autosuggest/v1.0/US/USD/en-US";
+    private final static String FLIGHTS = "FLIGHTS";
+    private final static String HOST = "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com";
+    private final static String KEY = "d464289547msh88d10c92e7e7c93p14eb4djsn3874fe4ced5d";
     private final Handler thHandler = new Handler();
-
-    private final String FLIGHTS = "FLIGHTS";
-
+    private String errMsg = "";
     private EditText depart, destin, departDate, returnDate;
-    CheckBox anytimeCheckBox, onewayCheckBox;
+    CheckBox flexibleCheckBox, onewayCheckBox;
     Button queryAPIbutton;
     ImageView loadingAnimation;
     String results;
@@ -64,41 +58,57 @@ public class AtYourService extends AppCompatActivity {
         onewayCheckBox = findViewById(R.id.oneway_checkbox_id);
         onewayCheckBox.setOnClickListener(v->onewayCheckBoxListener());
 
-        anytimeCheckBox = findViewById(R.id.anytime_checkbox_id);
-        anytimeCheckBox.setOnClickListener(v -> anytimeCheckBoxListener());
+        flexibleCheckBox = findViewById(R.id.anytime_checkbox_id);
+        flexibleCheckBox.setOnClickListener(v -> flexibleCheckBoxListener());
 
         queryAPIbutton = findViewById(R.id.queryAPI_button_id);
         queryAPIbutton.setOnClickListener(v -> queryAPIonSeparateRunnableThread());
+
         loadingAnimation = findViewById(R.id.loading_animation_id);
     }
 
-    public void queryAPIonSeparateRunnableThread(){
-        loadingAnimation.setVisibility(View.VISIBLE);
-        queryAPIbutton.setVisibility(View.INVISIBLE);
-        depart.setVisibility(View.INVISIBLE);
-        destin.setVisibility(View.INVISIBLE);
+    @Override
+    protected void onStart() {
+        //Handles the input boxes' visibility
+        //on back button hit
+        super.onStart();
+        refreshInputBoxes();
+    }
 
-        Intent intent = new Intent(this, AYSResultsPage.class);
-        Runnable query = new ScannerAPIQuery(intent);
-        new Thread(query).start();
+    @Override
+    protected void onResume() {
+        //Handles the input boxes' visibility
+        //on orientation change
+        super.onResume();
+        refreshInputBoxes();
     }
 
     public void onewayCheckBoxListener() {
-        if (onewayCheckBox.isChecked()) {
+        refreshInputBoxes();
+    }
+
+    public void flexibleCheckBoxListener() {
+        refreshInputBoxes();
+    }
+
+    private void refreshInputBoxes() {
+        if (flexibleCheckBox.isChecked()) {
+            departDate.setVisibility(View.INVISIBLE);
             returnDate.setVisibility(View.INVISIBLE);
-        } else {
+        } else if (onewayCheckBox.isChecked() && !flexibleCheckBox.isChecked()){
+            departDate.setVisibility(View.VISIBLE);
+            returnDate.setVisibility(View.INVISIBLE);
+        } else if (!onewayCheckBox.isChecked() && !flexibleCheckBox.isChecked()) {
+            departDate.setVisibility(View.VISIBLE);
             returnDate.setVisibility(View.VISIBLE);
         }
     }
 
-    public void anytimeCheckBoxListener() {
-        if (anytimeCheckBox.isChecked()) {
-            departDate.setVisibility(View.INVISIBLE);
-            returnDate.setVisibility(View.INVISIBLE);
-        } else {
-            departDate.setVisibility(View.VISIBLE);
-            returnDate.setVisibility(View.VISIBLE);
-        }
+    public void queryAPIonSeparateRunnableThread(){
+        toggleLoadingImageOn();
+        Intent intent = new Intent(this, AYSResultsPage.class);
+        Runnable query = new ScannerAPIQuery(intent);
+        new Thread(query).start();
     }
 
     //Class that implements the Runnable interface and queries the Scanner API
@@ -119,8 +129,8 @@ public class AtYourService extends AppCompatActivity {
                         returnDate.getText().toString()));
 
                 HttpURLConnection conn = (HttpURLConnection) endpoint.openConnection();
-                conn.setRequestProperty("x-rapidapi-host", apiHost);
-                conn.setRequestProperty("x-rapidapi-key", apiKey);
+                conn.setRequestProperty("x-rapidapi-host", HOST);
+                conn.setRequestProperty("x-rapidapi-key", KEY);
                 conn.setRequestMethod("GET");
                 conn.connect();
 
@@ -129,16 +139,14 @@ public class AtYourService extends AppCompatActivity {
                 results = convertStreamToString(inputStream);
 
             } catch (IOException e) {
-                errMsg = "Sorry, there's an issue. Please check your network connection and " +
+                errMsg = "Sorry, there's an issue. Please check your network connection, " +
+                        "or check for spelling mistakes and " +
                         "try again";
             }
 
             thHandler.post(() -> {
                 //Callback data
-                loadingAnimation.setVisibility(View.INVISIBLE);
-                queryAPIbutton.setVisibility(View.VISIBLE);
-                depart.setVisibility(View.VISIBLE);
-                destin.setVisibility(View.VISIBLE);
+                toggleLoadingImageOff();
 
                 if (!errMsg.equals("")) {
                     Toast t = Toast.makeText(AtYourService.this, errMsg, Toast.LENGTH_SHORT);
@@ -163,41 +171,32 @@ public class AtYourService extends AppCompatActivity {
             String formattedDepartDate = "anytime";
             String formattedReturnDate = "";
 
-            //both checked
-                //-need anytime and ""
-            //anytime but not one way
-                //-need anytime and anytime
-            //one way but not anytime
-                //-need depart and ""
-            //both unchecked
-                //-need depart and return
-
-            if (anytimeCheckBox.isChecked() && !onewayCheckBox.isChecked()) {
+            if (flexibleCheckBox.isChecked() && !onewayCheckBox.isChecked()) {
                 formattedDepartDate = "anytime";
                 formattedReturnDate = "anytime";
-            } if (onewayCheckBox.isChecked() &&!anytimeCheckBox.isChecked()) {
+            } if (onewayCheckBox.isChecked() &&!flexibleCheckBox.isChecked()) {
                 formattedDepartDate = FlightInfo.reformatDateInputString(departDate);
                 formattedReturnDate = "";
-            } if (!onewayCheckBox.isChecked() &&!anytimeCheckBox.isChecked()) {
+            } if (!onewayCheckBox.isChecked() &&!flexibleCheckBox.isChecked()) {
                 formattedDepartDate = FlightInfo.reformatDateInputString(departDate);
                 formattedReturnDate = FlightInfo.reformatDateInputString(returnDate);
             }
 
             String requiredInputs = "/" + formattedDepart + "/" + formattedDestin + "/" + formattedDepartDate;
             if (!formattedReturnDate.equals("")){
-                requiredInputs += "/" + returnDate;
+                requiredInputs += "/" + formattedReturnDate;
             }
 
-            return "https://" + apiHost + DEFAULTS_QUOTES + requiredInputs + "/?rapidapi-key=" + apiKey;
+            return "https://" + HOST + DEFAULTS_QUOTES + requiredInputs + "/?rapidapi-key=" + KEY;
         }
 
         private String formatPlaceCode(String place){
             try {
                 URL endpoint = new URL("https://"
-                        + apiHost + DEFAULTS_PLACES
+                        + HOST + DEFAULTS_PLACES
                         + "/?query=" + place);
                 HttpURLConnection conn = (HttpURLConnection) endpoint.openConnection();
-                conn.setRequestProperty("x-rapidapi-key", apiKey);
+                conn.setRequestProperty("x-rapidapi-key", KEY);
                 conn.connect();
 
                 InputStream inputStream = conn.getInputStream();
@@ -215,6 +214,27 @@ public class AtYourService extends AppCompatActivity {
             }
             return "";
         }
+    }
+
+    public void toggleLoadingImageOn(){
+        loadingAnimation.setVisibility(View.VISIBLE);
+        queryAPIbutton.setVisibility(View.INVISIBLE);
+        depart.setVisibility(View.INVISIBLE);
+        destin.setVisibility(View.INVISIBLE);
+        departDate.setVisibility(View.INVISIBLE);
+        returnDate.setVisibility(View.INVISIBLE);
+        flexibleCheckBox.setVisibility(View.INVISIBLE);
+        onewayCheckBox.setVisibility(View.INVISIBLE);
+    }
+
+    public void toggleLoadingImageOff(){
+        loadingAnimation.setVisibility(View.INVISIBLE);
+        queryAPIbutton.setVisibility(View.VISIBLE);
+        depart.setVisibility(View.VISIBLE);
+        destin.setVisibility(View.VISIBLE);
+        flexibleCheckBox.setVisibility(View.VISIBLE);
+        onewayCheckBox.setVisibility(View.VISIBLE);
+        refreshInputBoxes();
     }
 
 

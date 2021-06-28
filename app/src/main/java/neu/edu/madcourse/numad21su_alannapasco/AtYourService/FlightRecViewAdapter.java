@@ -14,7 +14,7 @@ import neu.edu.madcourse.numad21su_alannapasco.R;
 
 public class FlightRecViewAdapter extends RecyclerView.Adapter<FlightRecViewAdapter.RecViewHolder> {
 
-    private final ArrayList<FlightInfo> flightList;
+    private ArrayList<FlightInfo> flightList;
 
     public FlightRecViewAdapter(ArrayList<FlightInfo> flightlist) {
         this.flightList = flightlist;
@@ -63,6 +63,7 @@ public class FlightRecViewAdapter extends RecyclerView.Adapter<FlightRecViewAdap
     @Override
     public void onBindViewHolder(FlightRecViewAdapter.RecViewHolder holder, int index) {
         FlightInfo curFlight = flightList.get(index);
+
         holder.setFlightPrice(curFlight.getPrice());
         holder.setFlightDate(curFlight.getDate());
         holder.setFlightFrom(curFlight.getFrom());
@@ -72,5 +73,9 @@ public class FlightRecViewAdapter extends RecyclerView.Adapter<FlightRecViewAdap
     @Override
     public int getItemCount() {
         return flightList.size();
+    }
+
+    public void updateDisplayList(ArrayList<FlightInfo> filteredList) {
+        this.flightList = filteredList;
     }
 }

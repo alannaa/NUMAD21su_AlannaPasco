@@ -26,12 +26,15 @@
     <string name="to_hint">To (required)</string>
     <string name="depart_date_hint">Leave MM-DD-YYYY (required)</string>
     <string name="return_date_hint">Return MM-DD-YYYY (required)</string>
-    <string name="ays_hint_string">Choose specific travel dates, or click \"anytime\" to view the cheapest options on any date!</string>
+    <string name="ays_hint_string">Choose specific travel dates, or click \"flexible dates\" to view the cheapest upcoming options!</string>
     <string name="from_result_label">From: </string>
     <string name="to_result_label">To: </string>
-    <string name="ays_results_error_string">\"Oops! There are no flights for those dates. Sorry!\"</string>
-    <string name="anytime_checkbox_string">anytime</string>
+    <string name="ays_results_error_string">Oops! There are no flights for those dates. Sorry!</string>
+    <string name="flexible_checkbox_string">flexible dates</string>
     <string name="oneway_checkbox_string">one way</string>
+    <string name="filter_label_string">filter results:</string>
+    <string name="outbound_string">outbound</string>
+    <string name="inbound_string">inbound</string>
 
 
 </resources>

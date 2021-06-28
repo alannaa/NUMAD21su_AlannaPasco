@@ -8,11 +8,13 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/flight_recycler_view_id"
-        android:layout_width="391dp"
-        android:layout_height="654dp"
+        android:layout_width="396dp"
+        android:layout_height="564dp"
+        android:layout_marginBottom="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/ays_results_error_id"
@@ -28,4 +30,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.028" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

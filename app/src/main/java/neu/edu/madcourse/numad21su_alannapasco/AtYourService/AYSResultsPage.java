@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import neu.edu.madcourse.numad21su_alannapasco.R;
 
@@ -25,17 +27,17 @@ public class AYSResultsPage extends AppCompatActivity {
 
     private RecyclerView recView;
     private FlightRecViewAdapter recViewAdapter;
-    private RecyclerView.LayoutManager recLayoutManager;
     private JSONObject results;
+    int numOutBound = 0;
 
-    private static final String NUM_LINKS = "NUM_LINKS";
+    private static final String NUM_FLIGHTS = "NUM_FLIGHTS";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aysresults_page);
 
-        init(savedInstanceState);
+        createRecyclerView();
         buildFlightList();
     }
 
@@ -47,15 +49,27 @@ public class AYSResultsPage extends AppCompatActivity {
 
             for(int i = 0; i < quotes.length(); i++){
                 JSONObject aQuote = quotes.getJSONObject(i);
-                JSONObject leg = aQuote.getJSONObject("OutboundLeg");
+                JSONObject legOut = aQuote.getJSONObject("OutboundLeg");
                 //made up of JSONObjects with keys: MinPrice, OriginId, DestinationId, DepartureDate
-                FlightInfo newFlight = new FlightInfo(
+                FlightInfo newOut = new FlightInfo(
                         aQuote.getString("MinPrice"),
-                        FlightInfo.reformatDateOutputString(leg.getString("DepartureDate")),
-                        getPlaceName(places, leg.getString("OriginId")),
-                        getPlaceName(places, leg.getString("DestinationId")));
-                flightList.add(newFlight);
-                recViewAdapter.notifyItemInserted(flightList.size()-1);
+                        FlightInfo.reformatDateOutputString(legOut.getString("DepartureDate")),
+                        getPlaceName(places, legOut.getString("OriginId")),
+                        getPlaceName(places, legOut.getString("DestinationId")));
+                flightList.add(numOutBound, newOut);
+                recViewAdapter.notifyItemInserted(numOutBound);
+                numOutBound++;
+
+                if (aQuote.has("InboundLeg")) {
+                    JSONObject legIn = aQuote.getJSONObject("InboundLeg");
+                    FlightInfo newIn = new FlightInfo(
+                            aQuote.getString("MinPrice"),
+                            FlightInfo.reformatDateOutputString(legIn.getString("DepartureDate")),
+                            getPlaceName(places, legIn.getString("OriginId")),
+                            getPlaceName(places, legIn.getString("DestinationId")));
+                    flightList.add(newIn);
+                    recViewAdapter.notifyItemInserted(flightList.size()-1);
+                }
             }
 
             if (quotes.length() == 0){
@@ -91,49 +105,8 @@ public class AYSResultsPage extends AppCompatActivity {
         finish();
     }
 
-    /////////////// Accommodate config changes ///////////////
-    //Handle orientation changes
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        int size = flightList == null ? 0 : flightList.size();
-        outState.putInt(NUM_LINKS, size);
-
-        for(int i = 0; i < size; i++){
-            // send key/value pair for each link on list
-            outState.putString(FlightInfo.generatePriceKey(i), flightList.get(i).getPrice());
-            outState.putString(FlightInfo.generateDateKey(i), flightList.get(i).getDate());
-            outState.putString(FlightInfo.generateFromKey(i), flightList.get(i).getFrom());
-            outState.putString(FlightInfo.generateToKey(i), flightList.get(i).getTo());
-        }
-        super.onSaveInstanceState(outState);
-    }
-
-    private void init(Bundle savedInstanceState){
-        initialItemData(savedInstanceState);
-        createRecyclerView();
-    }
-
-    private void initialItemData(Bundle savedInstanceState){
-        //If this activity has been opened before and has existing data
-        if (savedInstanceState != null && savedInstanceState.containsKey(NUM_LINKS)) {
-            if (flightList != null || flightList.size() == 0) {
-                int size = savedInstanceState.getInt(NUM_LINKS);
-                for (int i = 0; i < size; i++) {
-                    String price = savedInstanceState.getString(FlightInfo.generatePriceKey(i));
-                    String date = savedInstanceState.getString(FlightInfo.generateDateKey(i));
-                    String from = savedInstanceState.getString(FlightInfo.generateFromKey(i));
-                    String to = savedInstanceState.getString(FlightInfo.generateToKey(i));
-
-                    FlightInfo flight = new FlightInfo(price, date, from, to);
-                    flightList.add(flight);
-                }
-            }
-        }
-        //else, we want the list to appear blank
-    }
-
     private void createRecyclerView(){
-        recLayoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager recLayoutManager = new LinearLayoutManager(this);
 
         recView = findViewById(R.id.flight_recycler_view_id);
 
@@ -141,5 +114,4 @@ public class AYSResultsPage extends AppCompatActivity {
         recView.setAdapter(recViewAdapter);
         recView.setLayoutManager(recLayoutManager);
     }
-    /////////////// End: Accommodate config changes ///////////////
 }

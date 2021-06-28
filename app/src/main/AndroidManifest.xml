@@ -16,11 +16,11 @@
         android:theme="@style/Theme.NUMAD21SuAlannaPasco">
         <activity
             android:name=".AtYourService.AYSResultsPage"
-            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:configChanges="keyboardHidden|screenSize"
             android:parentActivityName=".AtYourService.AtYourService"/>
         <activity
             android:name=".AtYourService.AtYourService"
-            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:configChanges="keyboardHidden|screenSize"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Locator.Locator"
@@ -39,7 +39,7 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize">
+            android:configChanges="keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

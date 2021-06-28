@@ -16,51 +16,52 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.949"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/depart_input_id"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.089" />
+        app:layout_constraintVertical_bias="0.012" />
 
     <TextView
         android:id="@+id/ays_hint_id"
-        android:layout_width="283dp"
-        android:layout_height="89dp"
+        android:layout_width="333dp"
+        android:layout_height="52dp"
         android:text="@string/ays_hint_string"
         android:textAlignment="center"
         android:textColor="#AD0B0A0A"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.966"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.282" />
+        app:layout_constraintVertical_bias="0.122" />
+
 
     <EditText
         android:id="@+id/depart_input_id"
-        android:layout_width="349dp"
-        android:layout_height="47dp"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
         android:hint="@string/from_hint"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.039"
+        app:layout_constraintEnd_toStartOf="@id/destin_input_id"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.135" />
+        app:layout_constraintVertical_bias="0.3" />
 
     <EditText
         android:id="@+id/return_date_input_id"
         android:layout_width="267dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="476dp"
         android:ems="10"
         android:hint="@string/return_date_hint"
         android:inputType="date"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.827" />
+        app:layout_constraintStart_toEndOf="@id/depart_date_input_id"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/queryAPI_button_id"
@@ -69,10 +70,10 @@
         android:text="@string/queryAPI_button_string"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.84"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.723" />
+        app:layout_constraintVertical_bias="0.862" />
 
     <EditText
         android:id="@+id/depart_date_input_id"
@@ -84,31 +85,43 @@
         android:inputType="date"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.659" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/destin_input_id"
-        android:layout_width="349dp"
-        android:layout_height="47dp"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
         android:hint="@string/to_hint"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.039"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.955"
+        app:layout_constraintStart_toEndOf="@id/depart_input_id"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.309" />
+        app:layout_constraintVertical_bias="0.3" />
 
     <CheckBox
-        android:id="@+id/anytime_checkbox"
+        android:id="@+id/oneway_checkbox_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/anytime_checkbox_string"
+        android:layout_marginTop="8dp"
+        android:text="@string/oneway_checkbox_string"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.023"
+        app:layout_constraintHorizontal_bias="0.026"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/destin_input_id" />
+        app:layout_constraintTop_toBottomOf="@id/depart_date_input_id" />
+
+    <CheckBox
+        android:id="@+id/anytime_checkbox_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/flexible_checkbox_string"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.017"
+        app:layout_constraintStart_toEndOf="@id/oneway_checkbox_id"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.692" />
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/loading_animation_id"
@@ -118,9 +131,9 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.42" />
+        app:layout_constraintVertical_bias="0.425" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
