@@ -32,55 +32,59 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.315" />
+        app:layout_constraintVertical_bias="0.843" />
 
     <Button
         android:id="@+id/link_collector_button_id"
-        android:layout_width="391dp"
-        android:layout_height="wrap_content"
+        android:layout_width="129dp"
+        android:layout_height="129dp"
         android:backgroundTint="@color/muave_background"
         android:text="@string/link_collector_button_string"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.44" />
-
-    <Button
-        android:id="@+id/clicky_button_id"
-        android:layout_width="391dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/muave_background"
-        android:text="@string/clicky_button_string"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.578" />
-
-    <Button
-        android:id="@+id/locator_button_id"
-        android:layout_width="391dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/muave_background"
-        android:text="@string/locator_button_string"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.717" />
+        app:layout_constraintVertical_bias="0.28" />
 
     <Button
         android:id="@+id/ays_button_id"
-        android:layout_width="391dp"
-        android:layout_height="wrap_content"
+        android:layout_width="129dp"
+        android:layout_height="129dp"
         android:backgroundTint="@color/muave_contrast_green"
         android:fontFamily="serif"
         android:text="@string/ays_button_string"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.776"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.841" />
+        app:layout_constraintVertical_bias="0.54" />
+
+    <Button
+        android:id="@+id/clicky_button_id"
+        android:layout_width="129dp"
+        android:layout_height="129dp"
+        android:backgroundTint="@color/muave_background"
+        android:text="@string/clicky_button_string"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.776"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.281" />
+
+    <Button
+        android:id="@+id/locator_button_id"
+        android:layout_width="129dp"
+        android:layout_height="129dp"
+        android:backgroundTint="@color/muave_background"
+        android:text="@string/locator_button_string"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.538" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

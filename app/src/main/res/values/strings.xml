@@ -26,8 +26,7 @@
     <string name="to_hint">To (required)</string>
     <string name="depart_date_hint">Leave MM-DD-YYYY (required)</string>
     <string name="return_date_hint">Return MM-DD-YYYY (required)</string>
-    <string name="ays_hint_string">Choose specific travel dates, or write \"anytime\" to view the cheapest options on any date! \n\n
-                                     Leave return date blank for a one-way trip.</string>
+    <string name="ays_hint_string">Choose specific travel dates, or click \"anytime\" to view the cheapest options on any date!</string>
     <string name="from_result_label">From: </string>
     <string name="to_result_label">To: </string>
     <string name="ays_results_error_string">\"Oops! There are no flights for those dates. Sorry!\"</string>

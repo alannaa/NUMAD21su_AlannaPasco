@@ -30,10 +30,8 @@ import neu.edu.madcourse.numad21su_alannapasco.R;
 
 public class AtYourService extends AppCompatActivity {
 
-    //TODO: make main activity TILES
     //TODO: handle layout errors
     //TODO: test one way and anytime checkboxes
-
 
     //For simplicity, defaults include:
     //Country == US ; Currency == USD ; Locale == en-US
