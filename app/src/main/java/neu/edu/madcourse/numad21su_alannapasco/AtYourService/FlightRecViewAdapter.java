@@ -14,10 +14,10 @@ import neu.edu.madcourse.numad21su_alannapasco.R;
 
 public class FlightRecViewAdapter extends RecyclerView.Adapter<FlightRecViewAdapter.RecViewHolder> {
 
-    private final ArrayList<FlightInfo> flightlist;
+    private final ArrayList<FlightInfo> flightList;
 
     public FlightRecViewAdapter(ArrayList<FlightInfo> flightlist) {
-        this.flightlist = flightlist;
+        this.flightList = flightlist;
     }
 
     public static class RecViewHolder extends  RecyclerView.ViewHolder {
@@ -34,20 +34,20 @@ public class FlightRecViewAdapter extends RecyclerView.Adapter<FlightRecViewAdap
             to = itemView.findViewById(R.id.flight_to_id);
         }
 
-        public void setFlightPrice(int price){
-            this.price.setText(String.valueOf(price));
+        public void setFlightPrice(String price){
+            this.price.setText("$" + price);
         }
 
         public void setFlightDate(String date){
-            this.date.setText(date);
+            this.date.setText("Flight Date: " + date);
         }
 
         public void setFlightFrom(String from){
-            this.from.setText(from);
+            this.from.setText("From: " + from);
         }
 
         public void setFlightTo(String to){
-            this.to.setText(to);
+            this.to.setText("To: " + to);
         }
 
     }
@@ -62,7 +62,7 @@ public class FlightRecViewAdapter extends RecyclerView.Adapter<FlightRecViewAdap
 
     @Override
     public void onBindViewHolder(FlightRecViewAdapter.RecViewHolder holder, int index) {
-        FlightInfo curFlight = flightlist.get(index);
+        FlightInfo curFlight = flightList.get(index);
         holder.setFlightPrice(curFlight.getPrice());
         holder.setFlightDate(curFlight.getDate());
         holder.setFlightFrom(curFlight.getFrom());
@@ -71,6 +71,6 @@ public class FlightRecViewAdapter extends RecyclerView.Adapter<FlightRecViewAdap
 
     @Override
     public int getItemCount() {
-        return flightlist.size();
+        return flightList.size();
     }
 }

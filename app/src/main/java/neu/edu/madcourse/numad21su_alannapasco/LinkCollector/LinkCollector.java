@@ -33,7 +33,7 @@ public class LinkCollector extends AppCompatActivity implements LinkDialogue.Lin
     FloatingActionButton addLinkFAB;
     private RecyclerView recView;
     private RecViewAdapter recViewAdapter;
-    private RecyclerView.LayoutManager recLayoutManger;
+    private RecyclerView.LayoutManager recLayoutManager;
 
     private static final String NUM_LINKS = "NUM_LINKS";
 
@@ -127,7 +127,7 @@ public class LinkCollector extends AppCompatActivity implements LinkDialogue.Lin
     }
 
     private void createRecyclerView(){
-        recLayoutManger = new LinearLayoutManager(this);
+        recLayoutManager = new LinearLayoutManager(this);
 
         recView = findViewById(R.id.recycler_view_id);
         recView.setHasFixedSize(true);
@@ -148,7 +148,7 @@ public class LinkCollector extends AppCompatActivity implements LinkDialogue.Lin
         };
         recViewAdapter.setOnClickListener(lcl);
         recView.setAdapter(recViewAdapter);
-        recView.setLayoutManager(recLayoutManger);
+        recView.setLayoutManager(recLayoutManager);
 
     }
     /////////////// End: Accommodate config changes ///////////////

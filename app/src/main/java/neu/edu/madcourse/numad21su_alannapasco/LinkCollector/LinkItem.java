@@ -18,10 +18,10 @@ import android.widget.Toast;
  */
 public class LinkItem implements LinkClickListener {
 
+    public static final String INSTANCE_KEY = "INSTANCE_KEY";
+
     private final String linkName;
     public final String linkURL;
-
-    public static final String INSTANCE_KEY = "INSTANCE_KEY";
 
     public LinkItem(String linkName, String linkURL){
         this.linkName = linkName;

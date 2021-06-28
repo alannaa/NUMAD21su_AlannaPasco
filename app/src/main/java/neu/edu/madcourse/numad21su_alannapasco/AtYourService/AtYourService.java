@@ -33,19 +33,22 @@ public class AtYourService extends AppCompatActivity {
     //TODO: add checkbox to automate "anytime" flights
     //TODO: handle layout errors
 
+
     //For simplicity, defaults include:
     //Country == US ; Currency == USD ; Locale == en-US
     private final String DEFAULTS_QUOTES = "/apiservices/browsequotes/v1.0/US/USD/en-US";
     private final String DEFAULTS_PLACES = "/apiservices/autosuggest/v1.0/US/USD/en-US";
     private final String apiHost = "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com";
     private final String apiKey = "d464289547msh88d10c92e7e7c93p14eb4djsn3874fe4ced5d";
-    String errMsg = "";
+    private String errMsg = "";
     private final Handler thHandler = new Handler();
+
+    private final String FLIGHTS = "FLIGHTS";
 
     private EditText depart, destin, departDate, returnDate;
     ImageView loadingAnimation;
     Button queryAPIbutton;
-    JSONObject results;
+    String results;
 
 
     @Override
@@ -68,6 +71,7 @@ public class AtYourService extends AppCompatActivity {
         queryAPIbutton.setVisibility(View.INVISIBLE);
         depart.setVisibility(View.INVISIBLE);
         destin.setVisibility(View.INVISIBLE);
+
         Intent intent = new Intent(this, AYSResultsPage.class);
         Runnable query = new ScannerAPIQuery(intent);
         new Thread(query).start();
@@ -76,10 +80,10 @@ public class AtYourService extends AppCompatActivity {
     //Class that implements the Runnable interface and queries the Scanner API
     class ScannerAPIQuery implements Runnable {
 
-        Intent resultsPage;
+        final Intent resultsIntent;
 
-        public ScannerAPIQuery(Intent resultsPage){
-            this.resultsPage = resultsPage;
+        public ScannerAPIQuery(Intent resultsIntent){
+            this.resultsIntent = resultsIntent;
         }
 
         @Override
@@ -88,7 +92,8 @@ public class AtYourService extends AppCompatActivity {
                 URL endpoint = new URL(formatURLasString(
                         formatPlaceCode(depart.getText().toString()),
                         formatPlaceCode(destin.getText().toString()),
-                        departDate.getText().toString(), returnDate.getText().toString()));
+                        FlightInfo.reformatDateInputString(departDate.getText().toString()),
+                        returnDate.getText().toString()));
 
                 HttpURLConnection conn = (HttpURLConnection) endpoint.openConnection();
                 conn.setRequestProperty("x-rapidapi-host", apiHost);
@@ -98,30 +103,28 @@ public class AtYourService extends AppCompatActivity {
 
                 // Read response.
                 InputStream inputStream = conn.getInputStream();
-                final String response = convertStreamToString(inputStream);
-
-                // Parse JSON
-                results =  new JSONObject(response);
+                results = convertStreamToString(inputStream);
 
             } catch (IOException e) {
                 errMsg = "Sorry, there's an issue. Please check your network connection and " +
                         "try again";
-            } catch (JSONException e) {
-                errMsg = "Sorry, something went wrong. Please try again.";
             }
+
             thHandler.post(() -> {
                 //Callback data
                 loadingAnimation.setVisibility(View.INVISIBLE);
                 queryAPIbutton.setVisibility(View.VISIBLE);
                 depart.setVisibility(View.VISIBLE);
                 destin.setVisibility(View.VISIBLE);
+
                 if (!errMsg.equals("")) {
                     Toast t = Toast.makeText(AtYourService.this, errMsg, Toast.LENGTH_SHORT);
                     t.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
                     t.show();
                     errMsg = "";
                 } else {
-                    startActivity(resultsPage);
+                    resultsIntent.putExtra(FLIGHTS, results);
+                    startActivity(resultsIntent);
                 }
             });
         }

@@ -13,6 +13,8 @@
     <string name="F_string">F</string>
     <string name="pressed_string">Pressed: </string>
     <string name="link_collector_button_string">Link Collector </string>
+    <string name="link_name_hint">Link Name</string>
+    <string name="link_url_hint">Link URL</string>
     <string name="long_label">Longitude:</string>
     <string name="lat_label">Latitude:</string>
     <string name="locator_header">Where in the world am I?</string>
@@ -20,14 +22,14 @@
     <string name="ays_button_string">at your service…</string>
     <string name="ays_header_string">Flying on a budget? Allow us to help…</string>
     <string name="queryAPI_button_string">Let\'s Go!</string>
-    <string name="link_name_hint">Link Name</string>
-    <string name="link_url_hint">Link URL</string>
     <string name="from_hint">From (required)</string>
     <string name="to_hint">To (required)</string>
-    <string name="depart_date_hint">Leave YYYY-MM-DD (required)</string>
-    <string name="return_date_hint">Return YYYY-MM-DD (optional)</string>
-    <string name="ays_hint_string">Choose specific travel dates, or write \"anytime\" to view the cheapest options on any date! \n\n
-                                    Leave return date blank for a one-way trip.</string>
+    <string name="depart_date_hint">Leave MM-DD-YYYY (required)</string>
+    <string name="return_date_hint">Return MM-DD-YYYY (optional)</string>
+    <string name="ays_hint_string">Leave return date blank for a one-way trip.</string>
+    <string name="from_result_label">From: </string>
+    <string name="to_result_label">To: </string>
+    <string name="ays_results_error_string">\"Oops! There are no flights for those dates. Sorry!\"</string>
 
 
 </resources>
