@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -30,8 +31,8 @@ import neu.edu.madcourse.numad21su_alannapasco.R;
 public class AtYourService extends AppCompatActivity {
 
     //TODO: make main activity TILES
-    //TODO: add checkbox to automate "anytime" flights
     //TODO: handle layout errors
+    //TODO: test one way and anytime checkboxes
 
 
     //For simplicity, defaults include:
@@ -46,8 +47,9 @@ public class AtYourService extends AppCompatActivity {
     private final String FLIGHTS = "FLIGHTS";
 
     private EditText depart, destin, departDate, returnDate;
-    ImageView loadingAnimation;
+    CheckBox anytimeCheckBox, onewayCheckBox;
     Button queryAPIbutton;
+    ImageView loadingAnimation;
     String results;
 
 
@@ -60,6 +62,12 @@ public class AtYourService extends AppCompatActivity {
         destin = findViewById(R.id.destin_input_id);
         departDate = findViewById(R.id.depart_date_input_id);
         returnDate = findViewById(R.id.return_date_input_id);
+
+        onewayCheckBox = findViewById(R.id.oneway_checkbox_id);
+        onewayCheckBox.setOnClickListener(v->onewayCheckBoxListener());
+
+        anytimeCheckBox = findViewById(R.id.anytime_checkbox_id);
+        anytimeCheckBox.setOnClickListener(v -> anytimeCheckBoxListener());
 
         queryAPIbutton = findViewById(R.id.queryAPI_button_id);
         queryAPIbutton.setOnClickListener(v -> queryAPIonSeparateRunnableThread());
@@ -77,6 +85,24 @@ public class AtYourService extends AppCompatActivity {
         new Thread(query).start();
     }
 
+    public void onewayCheckBoxListener() {
+        if (onewayCheckBox.isChecked()) {
+            returnDate.setVisibility(View.INVISIBLE);
+        } else {
+            returnDate.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void anytimeCheckBoxListener() {
+        if (anytimeCheckBox.isChecked()) {
+            departDate.setVisibility(View.INVISIBLE);
+            returnDate.setVisibility(View.INVISIBLE);
+        } else {
+            departDate.setVisibility(View.VISIBLE);
+            returnDate.setVisibility(View.VISIBLE);
+        }
+    }
+
     //Class that implements the Runnable interface and queries the Scanner API
     class ScannerAPIQuery implements Runnable {
 
@@ -90,9 +116,8 @@ public class AtYourService extends AppCompatActivity {
         public void run(){
             try {
                 URL endpoint = new URL(formatURLasString(
-                        formatPlaceCode(depart.getText().toString()),
-                        formatPlaceCode(destin.getText().toString()),
-                        FlightInfo.reformatDateInputString(departDate.getText().toString()),
+                        depart.getText().toString(), destin.getText().toString(),
+                        departDate.getText().toString(),
                         returnDate.getText().toString()));
 
                 HttpURLConnection conn = (HttpURLConnection) endpoint.openConnection();
@@ -135,11 +160,36 @@ public class AtYourService extends AppCompatActivity {
         }
 
         private String formatURLasString(String depart, String destin, String departDate, String returnDate) {
-            String requiredInputs = "/" + depart + "/" + destin + "/" + departDate;
-            //Optional input, comes through as empty string if user leaves blank
-            if (!returnDate.equals("")){
+            String formattedDepart = formatPlaceCode(depart);
+            String formattedDestin = formatPlaceCode(destin);
+            String formattedDepartDate = "anytime";
+            String formattedReturnDate = "";
+
+            //both checked
+                //-need anytime and ""
+            //anytime but not one way
+                //-need anytime and anytime
+            //one way but not anytime
+                //-need depart and ""
+            //both unchecked
+                //-need depart and return
+
+            if (anytimeCheckBox.isChecked() && !onewayCheckBox.isChecked()) {
+                formattedDepartDate = "anytime";
+                formattedReturnDate = "anytime";
+            } if (onewayCheckBox.isChecked() &&!anytimeCheckBox.isChecked()) {
+                formattedDepartDate = FlightInfo.reformatDateInputString(departDate);
+                formattedReturnDate = "";
+            } if (!onewayCheckBox.isChecked() &&!anytimeCheckBox.isChecked()) {
+                formattedDepartDate = FlightInfo.reformatDateInputString(departDate);
+                formattedReturnDate = FlightInfo.reformatDateInputString(returnDate);
+            }
+
+            String requiredInputs = "/" + formattedDepart + "/" + formattedDestin + "/" + formattedDepartDate;
+            if (!formattedReturnDate.equals("")){
                 requiredInputs += "/" + returnDate;
             }
+
             return "https://" + apiHost + DEFAULTS_QUOTES + requiredInputs + "/?rapidapi-key=" + apiKey;
         }
 

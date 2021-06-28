@@ -75,30 +75,31 @@
 
     <EditText
         android:id="@+id/depart_date_input_id"
-        android:layout_width="267dp"
-        android:layout_height="wrap_content"
+        android:layout_width="349dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="48dp"
         android:ems="10"
         android:hint="@string/depart_date_hint"
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.243"
+        app:layout_constraintHorizontal_bias="0.568"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/destin_input_id" />
 
     <EditText
         android:id="@+id/return_date_input_id"
-        android:layout_width="267dp"
-        android:layout_height="wrap_content"
+        android:layout_width="349dp"
+        android:layout_height="41dp"
         android:layout_marginTop="44dp"
         android:ems="10"
         android:hint="@string/return_date_hint"
         android:inputType="date"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.243"
+        app:layout_constraintHorizontal_bias="0.568"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/depart_date_input_id"
-        app:layout_constraintVertical_bias="0.004" />
+        app:layout_constraintVertical_bias="0.013" />
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/loading_animation_id"
@@ -112,4 +113,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.42" />
+
+    <CheckBox
+        android:id="@+id/oneway_checkbox_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/oneway_checkbox_string"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/destin_input_id" />
+
+    <CheckBox
+        android:id="@+id/anytime_checkbox_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/anytime_checkbox_string"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/oneway_checkbox_id"
+        app:layout_constraintTop_toBottomOf="@+id/destin_input_id" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

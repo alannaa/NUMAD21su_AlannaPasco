@@ -36,7 +36,10 @@ public class AYSResultsPage extends AppCompatActivity {
         setContentView(R.layout.activity_aysresults_page);
 
         init(savedInstanceState);
+        buildFlightList();
+    }
 
+    private void buildFlightList(){
         try {
             results = new JSONObject(getIntent().getStringExtra("FLIGHTS"));
             JSONArray quotes = results.getJSONArray("Quotes");
@@ -97,7 +100,7 @@ public class AYSResultsPage extends AppCompatActivity {
 
         for(int i = 0; i < size; i++){
             // send key/value pair for each link on list
-            outState.putString(FlightInfo.generatePriceKey(i), String.valueOf(flightList.get(i).getPrice()));
+            outState.putString(FlightInfo.generatePriceKey(i), flightList.get(i).getPrice());
             outState.putString(FlightInfo.generateDateKey(i), flightList.get(i).getDate());
             outState.putString(FlightInfo.generateFromKey(i), flightList.get(i).getFrom());
             outState.putString(FlightInfo.generateToKey(i), flightList.get(i).getTo());

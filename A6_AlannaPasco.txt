@@ -1,0 +1,9 @@
+Name: Alanna Pasco
+Assignment: A6 At Your Service
+API: SkyScanner flights lookup
+
+Personal GitHub Name: alannaa
+
+GitHub Repo URL:
+https://github.com/alannaa/NUMAD21su_AlannaPasco
+
