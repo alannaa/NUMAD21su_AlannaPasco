@@ -17,7 +17,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import neu.edu.madcourse.numad21su_alannapasco.R;
 
@@ -25,10 +24,9 @@ public class AYSResultsPage extends AppCompatActivity {
 
     private ArrayList<FlightInfo> flightList = new ArrayList<>();
 
-    private RecyclerView recView;
     private FlightRecViewAdapter recViewAdapter;
+    private CheckBox filterOut, filterIn;
     private JSONObject results;
-    int numOutBound = 0;
 
     private static final String NUM_FLIGHTS = "NUM_FLIGHTS";
 
@@ -37,11 +35,38 @@ public class AYSResultsPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aysresults_page);
 
+        filterOut = findViewById(R.id.out_filter_id);
+        filterOut.setOnClickListener(v -> filterCheckListener());
+
+        filterIn = findViewById(R.id.in_filter_id);
+        filterIn.setOnClickListener(v -> filterCheckListener());
+
         createRecyclerView();
         buildFlightList();
     }
 
+
+    @Override
+    protected void onResume() {
+        //handles saving the filter when changing orientation
+        super.onResume();
+        filterCheckListener();
+    }
+
+    public void filterCheckListener() {
+        if (filterOut.isChecked() && !filterIn.isChecked()) {
+            recViewAdapter.getFilter().filter("OUT");
+        } if (filterIn.isChecked() && !filterOut.isChecked()) {
+            recViewAdapter.getFilter().filter("IN");
+        } if ((!filterIn.isChecked() && !filterOut.isChecked()) ||
+                (filterIn.isChecked() && filterOut.isChecked())) {
+            recViewAdapter.getFilter().filter("");
+        }
+
+    }
+
     private void buildFlightList(){
+        int numOutBound = 0;
         try {
             results = new JSONObject(getIntent().getStringExtra("FLIGHTS"));
             JSONArray quotes = results.getJSONArray("Quotes");
@@ -55,7 +80,8 @@ public class AYSResultsPage extends AppCompatActivity {
                         aQuote.getString("MinPrice"),
                         FlightInfo.reformatDateOutputString(legOut.getString("DepartureDate")),
                         getPlaceName(places, legOut.getString("OriginId")),
-                        getPlaceName(places, legOut.getString("DestinationId")));
+                        getPlaceName(places, legOut.getString("DestinationId")),
+                        "OUT");
                 flightList.add(numOutBound, newOut);
                 recViewAdapter.notifyItemInserted(numOutBound);
                 numOutBound++;
@@ -66,7 +92,8 @@ public class AYSResultsPage extends AppCompatActivity {
                             aQuote.getString("MinPrice"),
                             FlightInfo.reformatDateOutputString(legIn.getString("DepartureDate")),
                             getPlaceName(places, legIn.getString("OriginId")),
-                            getPlaceName(places, legIn.getString("DestinationId")));
+                            getPlaceName(places, legIn.getString("DestinationId")),
+                            "IN");
                     flightList.add(newIn);
                     recViewAdapter.notifyItemInserted(flightList.size()-1);
                 }
@@ -107,8 +134,7 @@ public class AYSResultsPage extends AppCompatActivity {
 
     private void createRecyclerView(){
         RecyclerView.LayoutManager recLayoutManager = new LinearLayoutManager(this);
-
-        recView = findViewById(R.id.flight_recycler_view_id);
+        RecyclerView recView = findViewById(R.id.flight_recycler_view_id);
 
         recViewAdapter = new FlightRecViewAdapter(flightList);
         recView.setAdapter(recViewAdapter);

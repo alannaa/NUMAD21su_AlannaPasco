@@ -1,23 +1,30 @@
 package neu.edu.madcourse.numad21su_alannapasco.AtYourService;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import neu.edu.madcourse.numad21su_alannapasco.R;
 
-public class FlightRecViewAdapter extends RecyclerView.Adapter<FlightRecViewAdapter.RecViewHolder> {
+public class FlightRecViewAdapter extends RecyclerView.Adapter<FlightRecViewAdapter.RecViewHolder> implements Filterable {
 
-    private ArrayList<FlightInfo> flightList;
+    private final ArrayList<FlightInfo> flightList;
+    private ArrayList<FlightInfo> displayedFlightList;
 
     public FlightRecViewAdapter(ArrayList<FlightInfo> flightlist) {
         this.flightList = flightlist;
+        this.displayedFlightList = flightList;
     }
 
     public static class RecViewHolder extends  RecyclerView.ViewHolder {
@@ -62,7 +69,7 @@ public class FlightRecViewAdapter extends RecyclerView.Adapter<FlightRecViewAdap
 
     @Override
     public void onBindViewHolder(FlightRecViewAdapter.RecViewHolder holder, int index) {
-        FlightInfo curFlight = flightList.get(index);
+        FlightInfo curFlight = displayedFlightList.get(index);
 
         holder.setFlightPrice(curFlight.getPrice());
         holder.setFlightDate(curFlight.getDate());
@@ -71,11 +78,46 @@ public class FlightRecViewAdapter extends RecyclerView.Adapter<FlightRecViewAdap
     }
 
     @Override
-    public int getItemCount() {
-        return flightList.size();
+    public Filter getFilter(){
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                ArrayList<FlightInfo> filteredList = new ArrayList<>();
+                if (constraint.equals("")){
+                    displayedFlightList = flightList;
+
+                    Log.v("HELP", "displayed" + displayedFlightList.toString());
+                    Log.v("HELP", "all" + flightList.toString());
+                    notifyDataSetChanged();
+                } else {
+
+                    for (FlightInfo f : flightList) {
+                        if (f.getLeg().equals(constraint.toString())) {
+                            filteredList.add(f);
+                        }
+                    }
+                    displayedFlightList = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filteredList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults filterResults) {
+                notifyDataSetChanged();
+            }
+        };
     }
 
-    public void updateDisplayList(ArrayList<FlightInfo> filteredList) {
-        this.flightList = filteredList;
+    @Override
+    public int getItemCount() {
+        return displayedFlightList.size();
     }
+
+    public ArrayList<FlightInfo> getDisplayList(){
+        return this.displayedFlightList;
+    }
+
 }

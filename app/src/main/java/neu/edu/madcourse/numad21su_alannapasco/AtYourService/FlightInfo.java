@@ -4,16 +4,18 @@ public class FlightInfo {
 
     public static final String INSTANCE_KEY = "INSTANCE_KEY";
 
-    private String price;
-    private String date;
-    private String from;
-    private String to;
+    private final String price;
+    private final String date;
+    private final String from;
+    private final String to;
+    private final String leg; //ONE OF: "IN" OR "OUT"
 
-    public FlightInfo(String price, String date, String from, String to) {
+    public FlightInfo(String price, String date, String from, String to, String leg) {
         this.price = price;
         this.date = date;
         this.from = from;
         this.to = to;
+        this.leg = leg;
     }
 
     public String getPrice() {
@@ -26,20 +28,8 @@ public class FlightInfo {
 
     public String getTo() {return this.to; }
 
-    static String generatePriceKey(int index){
-        return INSTANCE_KEY + index + "pr";
-    }
-
-    static String generateDateKey(int index){
-        return INSTANCE_KEY + index + "da";
-    }
-
-    static String generateFromKey(int index){
-        return INSTANCE_KEY + index + "fr";
-    }
-
-    static String generateToKey(int index){
-        return INSTANCE_KEY + index + "to";
+    public String getLeg() {
+        return this.leg;
     }
 
     static String reformatDateOutputString(String date) {
